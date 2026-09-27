@@ -64,6 +64,10 @@ export function renderSecao(
         ...filtrados.map((c) => renderCard(c, cargo.id, estado, acoes)),
       );
       vazio.hidden = filtrados.length > 0;
+      total.textContent =
+        filtrados.length === cargo.candidatos.length
+          ? `${cargo.candidatos.length} candidatos`
+          : `${filtrados.length} de ${cargo.candidatos.length} candidatos`;
     }
 
     busca.addEventListener("input", renderizarGrade);
