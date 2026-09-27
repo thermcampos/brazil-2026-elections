@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, readdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import type { Bem, Candidato, Cargo, CargoId, BaseDados, HistoricoEntry } from "../src/types";
 
@@ -197,6 +197,22 @@ for (const arquivo of readdirSync("public/fotos")) {
   const match = arquivo.match(/^F\w\w(\d+)_div\.jpg$/i);
   if (match) fotosPorSq.set(match[1], `fotos/${arquivo}`);
 }
+const fotosPresidentes = new Map<string, string>();
+if (existsSync("president-pics")) {
+  for (const arquivo of readdirSync("president-pics")) {
+    if (!arquivo.toLowerCase().endsWith(".jpg")) continue;
+    mkdirSync("public/fotos/presidentes", { recursive: true });
+    cpSync(join("president-pics", arquivo), join("public/fotos/presidentes", arquivo));
+    fotosPresidentes.set(arquivo.replace(/\.jpg$/i, "").toLowerCase(), `fotos/presidentes/${arquivo}`);
+  }
+}
+
+function fotoPresidente(nomeUrna: string): string | null {
+  const base = nomeUrna.toLowerCase().trim().replace(/\s+/g, "-");
+  const semAcento = base.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return fotosPresidentes.get(base) ?? fotosPresidentes.get(semAcento) ?? null;
+}
+
 const propostasPorSq = new Map<string, string>();
 for (const arquivo of readdirSync(join("public/propostas", UF))) {
   const match = arquivo.match(/^\d{4}\w\w(\d+)_\d+\.pdf$/i);
@@ -239,7 +255,7 @@ function montarCandidato(r: Record<string, string>): Candidato {
     historico: historicoCandidato,
     mandato: mandatoAtual(registros),
     nota: null,
-    foto: fotosPorSq.get(sq) ?? null,
+    foto: fotosPorSq.get(sq) ?? fotoPresidente(r["NM_URNA_CANDIDATO"] ?? ""),
     proposta: propostasPorSq.get(sq) ?? null,
   };
 }
