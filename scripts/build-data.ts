@@ -94,6 +94,40 @@ for (const b of bens) {
 }
 
 console.log("Lendo redes sociais...");
+const REDES_HANDLES: [RegExp, string][] = [
+  [/tik ?tok/, "https://www.tiktok.com/@"],
+  [/^(x|twitter)$/, "https://x.com/"],
+  [/^(youtube|yt)$/, "https://www.youtube.com/@"],
+  [/^(facebook|fb)$/, "https://www.facebook.com/"],
+  [/threads/, "https://www.threads.net/@"],
+  [/^(instagram|insta|ig)$/, "https://www.instagram.com/"],
+];
+
+function normalizarRede(bruto: string): string | null {
+  let valor = bruto.trim().toLowerCase();
+  if (!valor) return null;
+  if (/^https?:\/\//.test(valor)) return valor.replace(/^http:\/\//, "https://");
+  if (valor.startsWith("@")) return `https://www.instagram.com/${valor.slice(1)}/`;
+  const comPrefixo = valor.match(/^([a-z ]+?)\s*[-:]\s*(.+)$/);
+  if (comPrefixo) {
+    const [, prefixo, resto] = comPrefixo;
+    if (/^https?:/.test(resto)) valor = resto;
+    else {
+      const handle = resto.replace(/^@/, "").replace(/\s.*$/, "");
+      for (const [padrao, base] of REDES_HANDLES) {
+        if (padrao.test(prefixo.trim())) return `${base}${handle}`;
+      }
+      if (handle) return `https://www.instagram.com/${handle}/`;
+      return null;
+    }
+  }
+  if (!/^https?:\/\//.test(valor)) {
+    if (!valor.includes(".")) return `https://www.instagram.com/${valor.replace(/^@/, "")}/`;
+    valor = `https://${valor}`;
+  }
+  return valor;
+}
+
 const redes = [
   ...parseCsv(unzipTexto("rede_social_candidato_2026.zip", `rede_social_candidato_2026_${UF}.csv`)),
   ...parseCsv(unzipTexto("rede_social_candidato_2026.zip", "rede_social_candidato_2026_BRASIL.csv")),
@@ -101,7 +135,7 @@ const redes = [
 const redesPorSq = new Map<string, string[]>();
 for (const r of redes) {
   const sq = r["SQ_CANDIDATO"];
-  const url = (r["DS_URL"] ?? "").trim().toLowerCase();
+  const url = normalizarRede(r["DS_URL"] ?? "");
   if (!sq || !url) continue;
   const lista = redesPorSq.get(sq) ?? [];
   if (!lista.includes(url)) lista.push(url);
