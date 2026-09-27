@@ -333,6 +333,24 @@ main {
   margin-bottom: 0;
 }
 
+.colinha__progresso {
+  color: var(--primaria);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-left: 0.75rem;
+}
+
+.colinha__dica {
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+  margin: 0.5rem 0 0;
+}
+
+.colinha__pendente {
+  color: var(--perigo);
+  font-style: italic;
+}
+
 .colinha__lista {
   margin: 1rem 0 0;
   display: grid;

@@ -62,7 +62,7 @@ export interface BaseDados {
 }
 
 export interface EstadoUsuario {
-  votos: Partial<Record<CargoId, string>>;
+  votos: Record<string, string>;
   favoritos: string[];
 }
 

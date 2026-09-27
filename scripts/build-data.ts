@@ -7,11 +7,11 @@ const UF = "SC";
 const ANO_ELEICAO = 2026;
 
 const CARGOS: { id: CargoId; nome: string; digitos: number; codigo: number; fonte: "SC" | "BRASIL" }[] = [
-  { id: "presidente", nome: "Presidente", digitos: 2, codigo: 1, fonte: "BRASIL" },
-  { id: "governador", nome: "Governador", digitos: 2, codigo: 3, fonte: "SC" },
-  { id: "senador", nome: "Senador", digitos: 3, codigo: 5, fonte: "SC" },
   { id: "deputado-federal", nome: "Deputado Federal", digitos: 4, codigo: 6, fonte: "SC" },
   { id: "deputado-estadual", nome: "Deputado Estadual", digitos: 5, codigo: 7, fonte: "SC" },
+  { id: "senador", nome: "Senador", digitos: 3, codigo: 5, fonte: "SC" },
+  { id: "governador", nome: "Governador", digitos: 2, codigo: 3, fonte: "SC" },
+  { id: "presidente", nome: "Presidente", digitos: 2, codigo: 1, fonte: "BRASIL" },
 ];
 
 const SITUACOES_INVALIDAS = /CASSAD|INDEFERID|RENUNCI|FALECID|ANULAD|IMPUGNAD/i;

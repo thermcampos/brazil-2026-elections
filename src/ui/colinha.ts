@@ -1,7 +1,14 @@
+import { chavesVoto } from "../storage";
 import type { BaseDados, EstadoUsuario } from "../types";
 
 export interface AcoesColinha {
   aoLimpar: () => void;
+}
+
+interface Slot {
+  rotulo: string;
+  digitos: number;
+  escolhido: string | null;
 }
 
 export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: AcoesColinha): HTMLElement {
@@ -9,33 +16,48 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
   secao.className = "colinha";
   secao.id = "colinha";
 
+  const slots: Slot[] = [];
+  for (const cargo of dados.cargos) {
+    const chaves = chavesVoto(cargo.id);
+    chaves.forEach((chave, i) => {
+      const sq = estado.votos[chave];
+      const candidato = sq ? cargo.candidatos.find((c) => c.sq === sq) : undefined;
+      slots.push({
+        rotulo: chaves.length > 1 ? `${cargo.nome} (${i + 1}º voto)` : cargo.nome,
+        digitos: cargo.digitos,
+        escolhido: candidato
+          ? `${candidato.numero} — ${candidato.nomeUrna} (${candidato.partido.sigla})`
+          : null,
+      });
+    });
+  }
+
+  const definidos = slots.filter((s) => s.escolhido !== null).length;
+
   const titulo = document.createElement("h2");
   titulo.textContent = "Minha colinha";
-  secao.appendChild(titulo);
+  const progresso = document.createElement("span");
+  progresso.className = "colinha__progresso";
+  progresso.textContent = `${definidos} de ${slots.length} votos definidos`;
+  secao.append(titulo, progresso);
 
-  const votos = dados.cargos
-    .map((cargo) => {
-      const sq = estado.votos[cargo.id];
-      const candidato = sq ? cargo.candidatos.find((c) => c.sq === sq) : undefined;
-      return { cargo, candidato };
-    })
-    .filter((v) => v.candidato);
-
-  if (votos.length === 0) {
-    const vazio = document.createElement("p");
-    vazio.className = "colinha__vazio";
-    vazio.textContent = "Você ainda não escolheu nenhum candidato. Toque em \"Meu voto\" nos cards acima.";
-    secao.appendChild(vazio);
-    return secao;
-  }
+  const dica = document.createElement("p");
+  dica.className = "colinha__dica";
+  dica.textContent = "Na ordem da urna: deputado federal, deputado estadual, senador (2 vagas), governador e presidente.";
+  secao.appendChild(dica);
 
   const lista = document.createElement("dl");
   lista.className = "colinha__lista";
-  for (const { cargo, candidato } of votos) {
+  for (const slot of slots) {
     const dt = document.createElement("dt");
-    dt.textContent = cargo.nome;
+    dt.textContent = `${slot.rotulo} · ${slot.digitos} dígitos`;
     const dd = document.createElement("dd");
-    dd.textContent = `${candidato!.numero} — ${candidato!.nomeUrna} (${candidato!.partido.sigla})`;
+    if (slot.escolhido) {
+      dd.textContent = slot.escolhido;
+    } else {
+      dd.textContent = "Ainda não escolhido";
+      dd.className = "colinha__pendente";
+    }
     lista.append(dt, dd);
   }
   secao.appendChild(lista);

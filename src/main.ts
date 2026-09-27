@@ -1,6 +1,6 @@
 import "./style.css";
 import { carregarDados } from "./data";
-import { alternarFavorito, carregarEstado, definirVoto, limparEscolhas } from "./storage";
+import { alternarFavorito, carregarEstado, definirVoto, limparEscolhas, rotuloVoto } from "./storage";
 import type { BaseDados, CargoId, EstadoUsuario, Filtros } from "./types";
 import { renderColinha } from "./ui/colinha";
 import { renderFiltros } from "./ui/filtros";
@@ -25,13 +25,13 @@ async function iniciar(): Promise<void> {
     if (!secao) return;
     for (const card of secao.querySelectorAll<HTMLElement>(".card")) {
       const sq = card.dataset.sq ?? "";
-      const votado = estado.votos[cargoId] === sq;
+      const rotulo = rotuloVoto(cargoId, estado, sq);
       const favorito = estado.favoritos.includes(sq);
-      card.classList.toggle("card--votado", votado);
+      card.classList.toggle("card--votado", rotulo !== null);
       const botaoVoto = card.querySelector<HTMLButtonElement>(".botao--voto, .botao--votado");
       if (botaoVoto) {
-        botaoVoto.className = votado ? "botao botao--votado" : "botao botao--voto";
-        botaoVoto.textContent = votado ? "✓ Meu voto" : "Meu voto";
+        botaoVoto.className = rotulo !== null ? "botao botao--votado" : "botao botao--voto";
+        botaoVoto.textContent = rotulo ?? "Meu voto";
       }
       const botaoFav = card.querySelector<HTMLButtonElement>(".botao--favorito");
       if (botaoFav) {

@@ -1,4 +1,5 @@
 import { formatarMoeda } from "../data";
+import { rotuloVoto } from "../storage";
 import type { Candidato, CargoId, EstadoUsuario } from "../types";
 
 export interface AcoesCard {
@@ -11,7 +12,8 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   card.className = "card";
   card.dataset.sq = candidato.sq;
 
-  const votado = estado.votos[cargo] === candidato.sq;
+  const rotulo = rotuloVoto(cargo, estado, candidato.sq);
+  const votado = rotulo !== null;
   const favorito = estado.favoritos.includes(candidato.sq);
   if (votado) card.classList.add("card--votado");
 
@@ -61,7 +63,7 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   const botaoVoto = document.createElement("button");
   botaoVoto.type = "button";
   botaoVoto.className = votado ? "botao botao--votado" : "botao botao--voto";
-  botaoVoto.textContent = votado ? "✓ Meu voto" : "Meu voto";
+  botaoVoto.textContent = rotulo ?? "Meu voto";
   botaoVoto.addEventListener("click", () => acoes.aoVotar(cargo, candidato.sq));
 
   const botaoFav = document.createElement("button");
