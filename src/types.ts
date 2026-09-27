@@ -65,3 +65,17 @@ export interface EstadoUsuario {
   votos: Partial<Record<CargoId, string>>;
   favoritos: string[];
 }
+
+export type FaixaPatrimonio =
+  | "zero"
+  | "ate-500-mil"
+  | "ate-1-milhao"
+  | "ate-2-milhoes"
+  | "ate-3-milhoes"
+  | "ate-5-milhoes"
+  | "acima-5-milhoes";
+
+export interface Filtros {
+  escolaridade: string | null;
+  patrimonio: FaixaPatrimonio | null;
+}

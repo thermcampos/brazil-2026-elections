@@ -1,0 +1,56 @@
+import { escolaridadesDisponiveis } from "../data";
+import type { BaseDados, FaixaPatrimonio, Filtros } from "../types";
+
+export const ROTULOS_PATRIMONIO: Record<FaixaPatrimonio, string> = {
+  zero: "Zerado",
+  "ate-500-mil": "Até R$ 500 mil",
+  "ate-1-milhao": "Até R$ 1 milhão",
+  "ate-2-milhoes": "Até R$ 2 milhões",
+  "ate-3-milhoes": "Até R$ 3 milhões",
+  "ate-5-milhoes": "Até R$ 5 milhões",
+  "acima-5-milhoes": "Acima de R$ 5 milhões",
+};
+
+export interface AcoesFiltros {
+  aoMudar: (filtros: Filtros) => void;
+}
+
+export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFiltros): HTMLElement {
+  const barra = document.createElement("div");
+  barra.className = "filtros";
+
+  const grupoEscolaridade = document.createElement("label");
+  grupoEscolaridade.className = "filtros__grupo";
+  const rotuloEscolaridade = document.createElement("span");
+  rotuloEscolaridade.textContent = "Escolaridade";
+  const selectEscolaridade = document.createElement("select");
+  selectEscolaridade.appendChild(new Option("Todas", ""));
+  for (const escolaridade of escolaridadesDisponiveis(dados)) {
+    selectEscolaridade.appendChild(new Option(escolaridade, escolaridade));
+  }
+  selectEscolaridade.value = filtros.escolaridade ?? "";
+  selectEscolaridade.addEventListener("change", () => {
+    filtros.escolaridade = selectEscolaridade.value || null;
+    acoes.aoMudar(filtros);
+  });
+  grupoEscolaridade.append(rotuloEscolaridade, selectEscolaridade);
+
+  const grupoPatrimonio = document.createElement("label");
+  grupoPatrimonio.className = "filtros__grupo";
+  const rotuloPatrimonio = document.createElement("span");
+  rotuloPatrimonio.textContent = "Patrimônio declarado";
+  const selectPatrimonio = document.createElement("select");
+  selectPatrimonio.appendChild(new Option("Todos", ""));
+  for (const [valor, rotulo] of Object.entries(ROTULOS_PATRIMONIO)) {
+    selectPatrimonio.appendChild(new Option(rotulo, valor));
+  }
+  selectPatrimonio.value = filtros.patrimonio ?? "";
+  selectPatrimonio.addEventListener("change", () => {
+    filtros.patrimonio = (selectPatrimonio.value || null) as FaixaPatrimonio | null;
+    acoes.aoMudar(filtros);
+  });
+  grupoPatrimonio.append(rotuloPatrimonio, selectPatrimonio);
+
+  barra.append(grupoEscolaridade, grupoPatrimonio);
+  return barra;
+}

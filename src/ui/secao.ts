@@ -1,8 +1,13 @@
-import { filtrarCandidatos } from "../data";
-import type { Cargo, EstadoUsuario } from "../types";
+import { aplicarFiltros, filtrarCandidatos } from "../data";
+import type { Cargo, EstadoUsuario, Filtros } from "../types";
 import { renderCard, type AcoesCard } from "./card";
 
-export function renderSecao(cargo: Cargo, estado: EstadoUsuario, acoes: AcoesCard): HTMLElement {
+export function renderSecao(
+  cargo: Cargo,
+  estado: EstadoUsuario,
+  acoes: AcoesCard,
+  obterFiltros: () => Filtros,
+): HTMLElement {
   const secao = document.createElement("section");
   secao.className = "secao";
   secao.id = `cargo-${cargo.id}`;
@@ -54,7 +59,7 @@ export function renderSecao(cargo: Cargo, estado: EstadoUsuario, acoes: AcoesCar
     vazio.hidden = true;
 
     function renderizarGrade(): void {
-      const filtrados = filtrarCandidatos(cargo.candidatos, busca.value);
+      const filtrados = aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca.value), obterFiltros());
       grade.replaceChildren(
         ...filtrados.map((c) => renderCard(c, cargo.id, estado, acoes)),
       );
@@ -62,6 +67,7 @@ export function renderSecao(cargo: Cargo, estado: EstadoUsuario, acoes: AcoesCar
     }
 
     busca.addEventListener("input", renderizarGrade);
+    window.addEventListener("filtros-alterados", renderizarGrade);
     renderizarGrade();
 
     corpo.append(busca, grade, vazio);

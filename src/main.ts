@@ -1,8 +1,9 @@
 import "./style.css";
 import { carregarDados } from "./data";
 import { alternarFavorito, carregarEstado, definirVoto, limparEscolhas } from "./storage";
-import type { BaseDados, CargoId, EstadoUsuario } from "./types";
+import type { BaseDados, CargoId, EstadoUsuario, Filtros } from "./types";
 import { renderColinha } from "./ui/colinha";
+import { renderFiltros } from "./ui/filtros";
 import { renderSecao } from "./ui/secao";
 
 async function iniciar(): Promise<void> {
@@ -66,9 +67,14 @@ async function iniciar(): Promise<void> {
     },
   };
 
-  const secoes = dados.cargos.map((cargo) => renderSecao(cargo, estado, acoes));
+  const filtros: Filtros = { escolaridade: null, patrimonio: null };
+  const barraFiltros = renderFiltros(dados, filtros, {
+    aoMudar: () => window.dispatchEvent(new Event("filtros-alterados")),
+  });
+
+  const secoes = dados.cargos.map((cargo) => renderSecao(cargo, estado, acoes, () => filtros));
   const colinha = renderColinha(dados, estado, { aoLimpar });
-  app.replaceChildren(...secoes, colinha);
+  app.replaceChildren(barraFiltros, ...secoes, colinha);
 }
 
 iniciar();
