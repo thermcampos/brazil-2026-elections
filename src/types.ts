@@ -17,6 +17,14 @@ export interface Partido {
   nome: string;
 }
 
+export interface HistoricoEntry {
+  ano: number;
+  cargo: string;
+  local: string;
+  partido: string;
+  resultado: string;
+}
+
 export interface Candidato {
   sq: string;
   numero: number;
@@ -33,6 +41,9 @@ export interface Candidato {
   patrimonioTotal: number;
   bens: Bem[];
   redes: string[];
+  historico: HistoricoEntry[];
+  mandato: string | null;
+  nota: string | null;
   foto: string | null;
   proposta: string | null;
 }

@@ -5,7 +5,24 @@ export async function carregarDados(): Promise<BaseDados> {
   if (!resposta.ok) {
     throw new Error(`Falha ao carregar dados: ${resposta.status}`);
   }
-  return (await resposta.json()) as BaseDados;
+  const dados = (await resposta.json()) as BaseDados;
+  const notas = await carregarNotas();
+  for (const cargo of dados.cargos) {
+    for (const candidato of cargo.candidatos) {
+      candidato.nota = notas[candidato.sq] ?? null;
+    }
+  }
+  return dados;
+}
+
+async function carregarNotas(): Promise<Record<string, string>> {
+  try {
+    const resposta = await fetch("data/notas.json");
+    if (!resposta.ok) return {};
+    return (await resposta.json()) as Record<string, string>;
+  } catch {
+    return {};
+  }
 }
 
 export function formatarMoeda(valor: number): string {

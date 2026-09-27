@@ -44,7 +44,15 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   adicionarItem(resumo, "Escolaridade", candidato.escolaridade);
   adicionarItem(resumo, "Patrimônio declarado", formatarMoeda(candidato.patrimonioTotal));
   if (candidato.idade !== null) adicionarItem(resumo, "Idade", `${candidato.idade} anos`);
+  if (candidato.mandato) adicionarItem(resumo, "Mandato atual", candidato.mandato);
   card.appendChild(resumo);
+
+  if (candidato.nota) {
+    const nota = document.createElement("p");
+    nota.className = "card__nota";
+    nota.textContent = candidato.nota;
+    card.appendChild(nota);
+  }
 
   const acoesEl = document.createElement("div");
   acoesEl.className = "card__acoes";
@@ -101,10 +109,24 @@ function renderDetalhes(candidato: Candidato): HTMLElement {
   adicionarItem(info, "Partido", `${candidato.partido.sigla} - ${candidato.partido.nome}`);
   if (candidato.coligacao) adicionarItem(info, "Coligação", candidato.coligacao);
   if (candidato.federacao) adicionarItem(info, "Federação", candidato.federacao);
-  adicionarItem(info, "Ocupação", candidato.ocupacao);
+  adicionarItem(info, "Ocupação declarada ao TSE", candidato.ocupacao);
   adicionarItem(info, "Gênero", candidato.genero);
   adicionarItem(info, "Cor/Raça", candidato.corRaca);
   detalhes.appendChild(info);
+
+  if (candidato.historico.length > 0) {
+    const tituloHistorico = document.createElement("h4");
+    tituloHistorico.textContent = "Trajetória eleitoral";
+    const listaHistorico = document.createElement("ul");
+    listaHistorico.className = "card__historico";
+    for (const h of candidato.historico) {
+      const item = document.createElement("li");
+      const local = h.local ? ` · ${h.local}` : "";
+      item.textContent = `${h.ano}: ${h.cargo}${local} (${h.partido}) — ${h.resultado}`;
+      listaHistorico.appendChild(item);
+    }
+    detalhes.append(tituloHistorico, listaHistorico);
+  }
 
   if (candidato.bens.length > 0) {
     const tituloBens = document.createElement("h4");

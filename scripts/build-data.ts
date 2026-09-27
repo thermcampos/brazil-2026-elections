@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, readdirSync } from "node:fs";
+import { mkdirSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import type { Bem, Candidato, Cargo, CargoId, BaseDados } from "../src/types";
+import type { Bem, Candidato, Cargo, CargoId, BaseDados, HistoricoEntry } from "../src/types";
 
 const UF = "SC";
 const ANO_ELEICAO = 2026;
@@ -108,9 +108,89 @@ for (const r of redes) {
   redesPorSq.set(sq, lista);
 }
 
+console.log("Lendo histórico de candidaturas...");
+const historico = [
+  ...parseCsv(unzipTexto("historico_candidatura_2026.zip", `historico_candidatura_2026_${UF}.csv`)),
+  ...parseCsv(unzipTexto("historico_candidatura_2026.zip", "historico_candidatura_2026_BRASIL.csv")),
+];
+
+interface RegistroHistorico {
+  ano: number;
+  cargo: string;
+  local: string;
+  partido: string;
+  resultado: string;
+  municipio: string | null;
+}
+
+const historicoPorSq = new Map<string, RegistroHistorico[]>();
+for (const h of historico) {
+  const sq = h["SQ_CANDIDATO_ATUAL"];
+  const resultado = h["DS_SIT_TOT_TURNO"] ?? "";
+  if (!sq || !resultado || resultado === "#NULO" || resultado === "#NE") continue;
+  const municipal = h["TP_ABRANGENCIA_ELEICAO"] === "M";
+  const lista = historicoPorSq.get(sq) ?? [];
+  const chave = `${h["ANO_ELEICAO"]}|${h["DS_CARGO"]}|${municipal ? (h["NM_UE"] ?? "") : ""}|${resultado}`;
+  if (lista.some((e) => `${e.ano}|${e.cargo}|${e.municipio ?? ""}|${e.resultado}` === chave)) continue;
+  lista.push({
+    ano: Number(h["ANO_ELEICAO"]),
+    cargo: h["DS_CARGO"] ?? "",
+    local: municipal ? limpo(h["NM_UE"] ?? "") ?? "" : h["SG_UF"] ?? "",
+    partido: h["SG_PARTIDO"] ?? "",
+    resultado,
+    municipio: municipal ? limpo(h["NM_UE"] ?? "") : null,
+  });
+  historicoPorSq.set(sq, lista);
+}
+for (const [sq, lista] of historicoPorSq) {
+  const finais = new Set(
+    lista
+      .filter((e) => e.resultado !== "2º turno")
+      .map((e) => `${e.ano}|${e.cargo}|${e.local}`),
+  );
+  historicoPorSq.set(
+    sq,
+    lista
+      .filter((e) => e.resultado !== "2º turno" || !finais.has(`${e.ano}|${e.cargo}|${e.local}`))
+      .sort((a, b) => b.ano - a.ano),
+  );
+}
+
+function eleito(resultado: string): boolean {
+  return /ELEITO/i.test(resultado) && !/N[ÃA]O ELEITO/i.test(resultado.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+}
+
+function mandatoAtual(registros: RegistroHistorico[]): string | null {
+  for (const h of registros) {
+    if (!eleito(h.resultado)) continue;
+    const cargo = h.cargo.toUpperCase();
+    if (h.ano === 2024 && /PREFEITO|VEREADOR/.test(cargo)) {
+      return `${h.cargo} de ${h.local} (2025-2028)`;
+    }
+    if (h.ano === 2022 && /DEPUTADO/.test(cargo)) {
+      return `${h.cargo} (${h.local}, 2023-2027)`;
+    }
+    if (h.ano === 2022 && /SENADOR/.test(cargo)) {
+      return `${h.cargo} (${h.local}, 2023-2031)`;
+    }
+    if (h.ano === 2018 && /SENADOR/.test(cargo)) {
+      return `${h.cargo} (${h.local}, 2019-2027)`;
+    }
+    if (h.ano === 2022 && /GOVERNADOR/.test(cargo) && !/VICE/.test(cargo)) {
+      return `${h.cargo} (${h.local}, 2023-2026)`;
+    }
+    if (h.ano === 2022 && /PRESIDENTE/.test(cargo) && !/VICE/.test(cargo)) {
+      return `${h.cargo} (2023-2026)`;
+    }
+  }
+  return null;
+}
+
 console.log("Extraindo fotos e propostas...");
 unzipPara(`foto_cand2026_${UF}_div.zip`, "public/fotos");
 unzipPara(`proposta_governo_2026_${UF}.zip`, "public/propostas");
+rmSync("public/fotos/leiame.pdf", { force: true });
+rmSync(`public/propostas/${UF}/leiame.pdf`, { force: true });
 
 const fotosPorSq = new Map<string, string>();
 for (const arquivo of readdirSync("public/fotos")) {
@@ -128,6 +208,14 @@ for (const arquivo of readdirSync(join("public/propostas", UF))) {
 function montarCandidato(r: Record<string, string>): Candidato {
   const sq = r["SQ_CANDIDATO"];
   const listaBens = (bensPorSq.get(sq) ?? []).sort((a, b) => b.valor - a.valor);
+  const registros = historicoPorSq.get(sq) ?? [];
+  const historicoCandidato: HistoricoEntry[] = registros.map((h) => ({
+    ano: h.ano,
+    cargo: h.cargo,
+    local: h.local,
+    partido: h.partido,
+    resultado: h.resultado,
+  }));
   return {
     sq,
     numero: Number(r["NR_CANDIDATO"]),
@@ -148,6 +236,9 @@ function montarCandidato(r: Record<string, string>): Candidato {
     patrimonioTotal: listaBens.reduce((total, b) => total + b.valor, 0),
     bens: listaBens,
     redes: redesPorSq.get(sq) ?? [],
+    historico: historicoCandidato,
+    mandato: mandatoAtual(registros),
+    nota: null,
     foto: fotosPorSq.get(sq) ?? null,
     proposta: propostasPorSq.get(sq) ?? null,
   };

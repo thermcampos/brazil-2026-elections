@@ -46,3 +46,14 @@ src/
 
 Fotos e propostas só existem nos arquivos do TSE para SC. Para atualizar os dados,
 baixe novamente os zips do TSE e rode `npm run build:data`.
+
+## Enriquecimento dos cards
+
+- **Trajetória eleitoral**: gerada a partir do `historico_candidatura_2026.zip`
+  (eleições passadas com resultado). Quando o candidato exerce mandato compatível
+  com 2026 (ex.: eleito deputado em 2022 ou prefeito em 2024), o card mostra o
+  selo "Mandato atual".
+- **Notas manuais**: edite `public/data/notas.json` (mapa de `SQ_CANDIDATO` para
+  texto livre) para registrar o que você descobrir por conta própria, como a
+  profissão real do candidato. A nota aparece em destaque no card. A "ocupação"
+  exibida é a autodeclarada ao TSE e pode estar desatualizada.
