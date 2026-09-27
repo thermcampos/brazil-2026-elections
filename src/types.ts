@@ -1,0 +1,56 @@
+export type CargoId =
+  | "presidente"
+  | "governador"
+  | "senador"
+  | "deputado-federal"
+  | "deputado-estadual";
+
+export interface Bem {
+  tipo: string;
+  descricao: string;
+  valor: number;
+}
+
+export interface Partido {
+  numero: number;
+  sigla: string;
+  nome: string;
+}
+
+export interface Candidato {
+  sq: string;
+  numero: number;
+  nomeUrna: string;
+  nomeCompleto: string;
+  partido: Partido;
+  coligacao: string | null;
+  federacao: string | null;
+  escolaridade: string;
+  ocupacao: string;
+  idade: number | null;
+  genero: string;
+  corRaca: string;
+  patrimonioTotal: number;
+  bens: Bem[];
+  redes: string[];
+  foto: string | null;
+  proposta: string | null;
+}
+
+export interface Cargo {
+  id: CargoId;
+  nome: string;
+  digitos: number;
+  candidatos: Candidato[];
+}
+
+export interface BaseDados {
+  geradoEm: string;
+  uf: string;
+  cargos: Cargo[];
+}
+
+export interface EstadoUsuario {
+  votos: Partial<Record<CargoId, string>>;
+  favoritos: string[];
+}

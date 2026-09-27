@@ -1,0 +1,289 @@
+:root {
+  --fundo: #f5f6f8;
+  --superficie: #ffffff;
+  --texto: #1c2530;
+  --texto-suave: #5a6675;
+  --borda: #dde2e8;
+  --primaria: #1a6b3c;
+  --primaria-hover: #145530;
+  --destaque: #f2c230;
+  --perigo: #b3372f;
+  --raio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+.topo {
+  background: var(--primaria);
+  color: #fff;
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.topo h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+}
+
+.subtitulo {
+  margin: 0 auto;
+  max-width: 40rem;
+  color: #d9ecdf;
+}
+
+main {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.carregando,
+.erro {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 3rem 0;
+}
+
+.erro {
+  color: var(--perigo);
+}
+
+.secao,
+.colinha {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.25rem 1.5rem;
+}
+
+.secao__cabecalho {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.secao__cabecalho h2,
+.colinha h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.secao__total {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.secao__corpo {
+  margin-top: 1rem;
+}
+
+.secao__busca {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font-size: 1rem;
+}
+
+.secao__vazio {
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+.botao {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: var(--texto);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.botao:hover {
+  border-color: var(--primaria);
+}
+
+.botao--ver {
+  margin-top: 1rem;
+  background: var(--primaria);
+  border-color: var(--primaria);
+  color: #fff;
+  font-weight: 600;
+}
+
+.botao--ver:hover {
+  background: var(--primaria-hover);
+}
+
+.botao--votado {
+  background: var(--primaria);
+  border-color: var(--primaria);
+  color: #fff;
+  font-weight: 600;
+}
+
+.botao--favorito.ativo {
+  color: var(--destaque);
+  border-color: var(--destaque);
+}
+
+.botao--limpar {
+  margin-top: 1rem;
+  color: var(--perigo);
+  border-color: var(--perigo);
+}
+
+.botao--proposta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  text-decoration: none;
+  color: var(--primaria);
+  border-color: var(--primaria);
+  font-weight: 600;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem;
+  background: var(--superficie);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card--votado {
+  border-color: var(--primaria);
+  box-shadow: 0 0 0 2px rgba(26, 107, 60, 0.25);
+}
+
+.card__cabecalho {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.card__foto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--borda);
+}
+
+.card__nome {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.card__numero {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.card__resumo {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.card__resumo dt {
+  color: var(--texto-suave);
+}
+
+.card__resumo dd {
+  margin: 0;
+}
+
+.card__acoes {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.card__detalhes {
+  border-top: 1px solid var(--borda);
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.card__detalhes h4 {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.card__bens,
+.card__redes {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.card__bens li,
+.card__redes li {
+  margin-bottom: 0.25rem;
+}
+
+.card__redes a {
+  color: var(--primaria);
+  word-break: break-all;
+}
+
+.card__aviso {
+  color: var(--texto-suave);
+  margin: 0.5rem 0 0;
+}
+
+.colinha {
+  border-color: var(--primaria);
+}
+
+.colinha__vazio {
+  color: var(--texto-suave);
+  margin-bottom: 0;
+}
+
+.colinha__lista {
+  margin: 1rem 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1rem;
+}
+
+.colinha__lista dt {
+  font-weight: 600;
+}
+
+.colinha__lista dd {
+  margin: 0;
+}
+
+.rodape {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  padding: 1.5rem 1rem 2.5rem;
+}
