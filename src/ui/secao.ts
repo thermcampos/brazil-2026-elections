@@ -33,6 +33,22 @@ export function renderSecao(
   corpo.hidden = true;
   secao.appendChild(corpo);
 
+  let busca: HTMLInputElement | null = null;
+
+  function contarFiltrados(): number {
+    return aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca?.value ?? ""), obterFiltros()).length;
+  }
+
+  function atualizarContador(): void {
+    const filtrados = contarFiltrados();
+    total.textContent =
+      filtrados === cargo.candidatos.length
+        ? `${cargo.candidatos.length} candidatos`
+        : `${filtrados} de ${cargo.candidatos.length} candidatos`;
+  }
+
+  window.addEventListener("filtros-alterados", atualizarContador);
+
   let aberto = false;
   botaoVer.addEventListener("click", () => {
     aberto = !aberto;
@@ -44,7 +60,7 @@ export function renderSecao(
   });
 
   function montarCorpo(): void {
-    const busca = document.createElement("input");
+    busca = document.createElement("input");
     busca.type = "search";
     busca.className = "secao__busca";
     busca.placeholder = "Buscar por nome, número ou partido…";
@@ -59,15 +75,12 @@ export function renderSecao(
     vazio.hidden = true;
 
     function renderizarGrade(): void {
-      const filtrados = aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca.value), obterFiltros());
+      const filtrados = aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca!.value), obterFiltros());
       grade.replaceChildren(
         ...filtrados.map((c) => renderCard(c, cargo.id, estado, acoes)),
       );
       vazio.hidden = filtrados.length > 0;
-      total.textContent =
-        filtrados.length === cargo.candidatos.length
-          ? `${cargo.candidatos.length} candidatos`
-          : `${filtrados.length} de ${cargo.candidatos.length} candidatos`;
+      atualizarContador();
     }
 
     busca.addEventListener("input", renderizarGrade);
