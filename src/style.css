@@ -274,9 +274,20 @@ main {
   margin-bottom: 0.25rem;
 }
 
-.card__redes a {
+.card__redes-icones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.card__redes-icones a {
+  color: var(--texto-suave);
+  display: inline-flex;
+  align-items: center;
+}
+
+.card__redes-icones a:hover {
   color: var(--primaria);
-  word-break: break-all;
 }
 
 .card__aviso {

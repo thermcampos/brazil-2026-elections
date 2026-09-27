@@ -80,6 +80,23 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   acoesEl.append(botaoVoto, botaoFav, botaoDetalhes);
   card.appendChild(acoesEl);
 
+  if (candidato.redes.length > 0) {
+    const redes = document.createElement("div");
+    redes.className = "card__redes-icones";
+    for (const url of candidato.redes) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      const rede = identificarRede(url);
+      link.title = rede.rotulo;
+      link.setAttribute("aria-label", rede.rotulo);
+      link.innerHTML = rede.svg;
+      redes.appendChild(link);
+    }
+    card.appendChild(redes);
+  }
+
   const detalhes = renderDetalhes(candidato);
   detalhes.hidden = true;
   botaoDetalhes.addEventListener("click", () => {
@@ -90,6 +107,51 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   card.appendChild(detalhes);
 
   return card;
+}
+
+const SVG = (conteudo: string): string =>
+  `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="currentColor" stroke-width="0">${conteudo}</svg>`;
+
+const ICONES: Record<string, string> = {
+  instagram: SVG(
+    `<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.4" stroke="none"/>`,
+  ),
+  facebook: SVG(
+    `<path stroke="none" d="M14 3h3.5v3.5H15c-.8 0-1 .5-1 1.3V10h4l-.6 3.5H14V21h-3.6v-7.5H7V10h3.4V7.6C10.4 4.9 12 3 14 3z"/>`,
+  ),
+  x: SVG(
+    `<path stroke="none" d="M3 3h4.6l5 6.7L18.4 3H21l-7 8.3L21.4 21h-4.6l-5.4-7.2L5.6 21H3l7.3-8.7z"/>`,
+  ),
+  threads: SVG(
+    `<circle cx="12" cy="12" r="9" fill="none" stroke-width="2"/><circle cx="12" cy="12" r="3.2" fill="none" stroke-width="2"/><path d="M15.2 12v3.5c0 1.4 1 2.5 2.4 2.5" fill="none" stroke-width="2"/>`,
+  ),
+  youtube: SVG(
+    `<rect x="2" y="5.5" width="20" height="13" rx="4" stroke="none"/><path d="M10 9.2v5.6l5-2.8z" fill="#fff" stroke="none"/>`,
+  ),
+  tiktok: SVG(
+    `<path stroke="none" d="M15 3c.4 2.8 2.4 4.8 5.2 5.2v3.1c-1.9 0-3.7-.6-5.2-1.7v5.9A5.5 5.5 0 1 1 9.5 10v3.2a2.4 2.4 0 1 0 2.4 2.4V3z"/>`,
+  ),
+  whatsapp: SVG(
+    `<path stroke="none" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c-.3 2.8 3.7 6.8 6.5 6.5l.8-1.8-2.2-1.2-.9.9c-.9-.4-1.9-1.4-2.3-2.3l.9-.9-1.2-2.2z" fill="#fff" stroke="none"/>`,
+  ),
+  site: SVG(
+    `<circle cx="12" cy="12" r="9" fill="none" stroke-width="2"/><ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke-width="2"/><path d="M3 12h18" fill="none" stroke-width="2"/>`,
+  ),
+};
+
+function identificarRede(url: string): { rotulo: string; svg: string } {
+  const host = url.replace(/^https?:\/\//, "").replace(/^www\./, "");
+  let rede = "site";
+  let rotulo = "Site";
+  if (host.includes("instagram.com")) [rede, rotulo] = ["instagram", "Instagram"];
+  else if (host.includes("facebook.com") || host.includes("fb.com")) [rede, rotulo] = ["facebook", "Facebook"];
+  else if (host.includes("x.com") || host.includes("twitter.com")) [rede, rotulo] = ["x", "X (Twitter)"];
+  else if (host.includes("threads.")) [rede, rotulo] = ["threads", "Threads"];
+  else if (host.includes("youtube.com") || host.includes("youtu.be")) [rede, rotulo] = ["youtube", "YouTube"];
+  else if (host.includes("tiktok.com")) [rede, rotulo] = ["tiktok", "TikTok"];
+  else if (host.includes("whatsapp.com") || host.includes("wa.me")) [rede, rotulo] = ["whatsapp", "WhatsApp"];
+  else rotulo = `Site (${host.split("/")[0]})`;
+  return { rotulo, svg: ICONES[rede] };
 }
 
 function adicionarItem(lista: HTMLDListElement, termo: string, valor: string): void {
@@ -144,24 +206,6 @@ function renderDetalhes(candidato: Candidato): HTMLElement {
     semBens.className = "card__aviso";
     semBens.textContent = "Nenhum bem declarado.";
     detalhes.appendChild(semBens);
-  }
-
-  if (candidato.redes.length > 0) {
-    const tituloRedes = document.createElement("h4");
-    tituloRedes.textContent = "Redes sociais";
-    const listaRedes = document.createElement("ul");
-    listaRedes.className = "card__redes";
-    for (const url of candidato.redes) {
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = url;
-      link.textContent = url.replace(/^https?:\/\/(www\.)?/, "");
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      item.appendChild(link);
-      listaRedes.appendChild(item);
-    }
-    detalhes.append(tituloRedes, listaRedes);
   }
 
   if (candidato.proposta) {
