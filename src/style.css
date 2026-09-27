@@ -96,6 +96,17 @@ main {
   color: var(--texto);
 }
 
+.filtros__grupo--checkbox {
+  cursor: pointer;
+}
+
+.filtros__grupo--checkbox input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--primaria);
+  cursor: pointer;
+}
+
 .secao__cabecalho {
   display: flex;
   align-items: baseline;

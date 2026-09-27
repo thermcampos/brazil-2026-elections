@@ -63,16 +63,21 @@ async function iniciar(): Promise<void> {
     },
     aoFavoritar: (sq: string) => {
       estado = alternarFavorito(sq);
+      if (filtros.somenteFavoritos) {
+        window.dispatchEvent(new Event("filtros-alterados"));
+      }
       for (const cargo of dados.cargos) atualizarCards(cargo.id);
     },
   };
 
-  const filtros: Filtros = { escolaridade: null, patrimonio: null };
+  const filtros: Filtros = { escolaridade: null, patrimonio: null, somenteFavoritos: false };
   const barraFiltros = renderFiltros(dados, filtros, {
     aoMudar: () => window.dispatchEvent(new Event("filtros-alterados")),
   });
 
-  const secoes = dados.cargos.map((cargo) => renderSecao(cargo, estado, acoes, () => filtros));
+  const secoes = dados.cargos.map((cargo) =>
+    renderSecao(cargo, estado, acoes, () => filtros, () => estado.favoritos),
+  );
   const colinha = renderColinha(dados, estado, { aoLimpar });
   app.replaceChildren(barraFiltros, ...secoes, colinha);
 }

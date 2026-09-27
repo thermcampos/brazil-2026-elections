@@ -7,6 +7,7 @@ export function renderSecao(
   estado: EstadoUsuario,
   acoes: AcoesCard,
   obterFiltros: () => Filtros,
+  obterFavoritos: () => string[],
 ): HTMLElement {
   const secao = document.createElement("section");
   secao.className = "secao";
@@ -36,7 +37,11 @@ export function renderSecao(
   let busca: HTMLInputElement | null = null;
 
   function contarFiltrados(): number {
-    return aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca?.value ?? ""), obterFiltros()).length;
+    return aplicarFiltros(
+      filtrarCandidatos(cargo.candidatos, busca?.value ?? ""),
+      obterFiltros(),
+      obterFavoritos(),
+    ).length;
   }
 
   function atualizarContador(): void {
@@ -75,7 +80,11 @@ export function renderSecao(
     vazio.hidden = true;
 
     function renderizarGrade(): void {
-      const filtrados = aplicarFiltros(filtrarCandidatos(cargo.candidatos, busca!.value), obterFiltros());
+      const filtrados = aplicarFiltros(
+        filtrarCandidatos(cargo.candidatos, busca!.value),
+        obterFiltros(),
+        obterFavoritos(),
+      );
       grade.replaceChildren(
         ...filtrados.map((c) => renderCard(c, cargo.id, estado, acoes)),
       );

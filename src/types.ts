@@ -78,4 +78,5 @@ export type FaixaPatrimonio =
 export interface Filtros {
   escolaridade: string | null;
   patrimonio: FaixaPatrimonio | null;
+  somenteFavoritos: boolean;
 }

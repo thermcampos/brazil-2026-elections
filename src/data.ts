@@ -51,8 +51,15 @@ const FAIXAS_PATRIMONIO: Record<string, [number, number]> = {
   "acima-5-milhoes": [5_000_000, Infinity],
 };
 
-export function aplicarFiltros(candidatos: Candidato[], filtros: Filtros): Candidato[] {
+export function aplicarFiltros(
+  candidatos: Candidato[],
+  filtros: Filtros,
+  favoritos: string[] = [],
+): Candidato[] {
   let resultado = candidatos;
+  if (filtros.somenteFavoritos) {
+    resultado = resultado.filter((c) => favoritos.includes(c.sq));
+  }
   if (filtros.escolaridade) {
     resultado = resultado.filter((c) => c.escolaridade === filtros.escolaridade);
   }

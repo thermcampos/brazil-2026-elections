@@ -51,6 +51,19 @@ export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFi
   });
   grupoPatrimonio.append(rotuloPatrimonio, selectPatrimonio);
 
-  barra.append(grupoEscolaridade, grupoPatrimonio);
+  const grupoFavoritos = document.createElement("label");
+  grupoFavoritos.className = "filtros__grupo filtros__grupo--checkbox";
+  const checkboxFavoritos = document.createElement("input");
+  checkboxFavoritos.type = "checkbox";
+  checkboxFavoritos.checked = filtros.somenteFavoritos;
+  checkboxFavoritos.addEventListener("change", () => {
+    filtros.somenteFavoritos = checkboxFavoritos.checked;
+    acoes.aoMudar(filtros);
+  });
+  const rotuloFavoritos = document.createElement("span");
+  rotuloFavoritos.textContent = "Com estrelas";
+  grupoFavoritos.append(checkboxFavoritos, rotuloFavoritos);
+
+  barra.append(grupoEscolaridade, grupoPatrimonio, grupoFavoritos);
   return barra;
 }
