@@ -107,12 +107,18 @@ const bens = [
   ...parseCsv(unzipTexto("bem_candidato_2026.zip", "bem_candidato_2026_BRASIL.csv")),
 ];
 const bensPorSq = new Map<string, Bem[]>();
+const bensVistos = new Set<string>();
 for (const b of bens) {
   const sq = b["SQ_CANDIDATO"];
   const valor = parseValor(b["VR_BEM_CANDIDATO"] ?? "");
   if (!sq || valor === 0) continue;
+  const tipo = b["DS_TIPO_BEM_CANDIDATO"] ?? "";
+  const descricao = b["DS_BEM_CANDIDATO"] ?? "";
+  const chave = `${sq}|${tipo}|${descricao}|${valor}`;
+  if (bensVistos.has(chave)) continue;
+  bensVistos.add(chave);
   const lista = bensPorSq.get(sq) ?? [];
-  lista.push({ tipo: b["DS_TIPO_BEM_CANDIDATO"] ?? "", descricao: b["DS_BEM_CANDIDATO"] ?? "", valor });
+  lista.push({ tipo, descricao, valor });
   bensPorSq.set(sq, lista);
 }
 
