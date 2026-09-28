@@ -94,7 +94,7 @@ baixe novamente os zips do TSE e rode `npm run build:data`.
 ## Custo de desenvolvimento (IA)
 
 Este projeto foi desenvolvido com assistência de IA (Crush CLI). Custo total
-acumulado estimado: **US$ 12,74**.
+acumulado estimado: **US$ 13,67**.
 
-> Última atualização: 2026-09-28 19:56 (-03) · fonte: soma de `cost` em
+> Última atualização: 2026-09-28 20:22 (-03) · fonte: soma de `cost` em
 > `.crush/crush.db` (tabela `sessions`). Ver `AGENTS.md` para como atualizar.
