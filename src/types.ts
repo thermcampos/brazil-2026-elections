@@ -105,5 +105,6 @@ export interface Filtros {
   escolaridade: string | null;
   patrimonio: FaixaPatrimonio | null;
   regiao: string | null;
+  espectro: PosicaoIdeologica | null;
   somenteFavoritos: boolean;
 }

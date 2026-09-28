@@ -1,4 +1,12 @@
-import type { BaseDados, Candidato, EspectroPartido, Filtros } from "./types";
+import type { BaseDados, Candidato, EspectroPartido, Filtros, PosicaoIdeologica } from "./types";
+
+export const ROTULOS_ESPECTRO: Record<PosicaoIdeologica, string> = {
+  esquerda: "Esquerda",
+  "centro-esquerda": "Centro-esquerda",
+  centro: "Centro",
+  "centro-direita": "Centro-direita",
+  direita: "Direita",
+};
 
 export async function carregarDados(): Promise<BaseDados> {
   const resposta = await fetch("data/candidatos.json");
@@ -113,6 +121,9 @@ export function aplicarFiltros(
       filtros.regiao === "__fora__"
         ? resultado.filter((c) => c.regiao === null)
         : resultado.filter((c) => c.regiao === filtros.regiao);
+  }
+  if (filtros.espectro) {
+    resultado = resultado.filter((c) => c.espectro?.posicao === filtros.espectro);
   }
   return resultado;
 }

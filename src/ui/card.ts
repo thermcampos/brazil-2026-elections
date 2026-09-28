@@ -1,14 +1,6 @@
-import { formatarMoeda, formatarNomePartido } from "../data";
+import { formatarMoeda, formatarNomePartido, ROTULOS_ESPECTRO } from "../data";
 import { rotuloVoto } from "../storage";
-import type { Candidato, CargoId, EspectroPartido, EstadoUsuario, PosicaoIdeologica } from "../types";
-
-const ROTULOS_ESPECTRO: Record<PosicaoIdeologica, string> = {
-  esquerda: "Esquerda",
-  "centro-esquerda": "Centro-esquerda",
-  centro: "Centro",
-  "centro-direita": "Centro-direita",
-  direita: "Direita",
-};
+import type { Candidato, CargoId, EspectroPartido, EstadoUsuario } from "../types";
 
 function textoEspectro(espectro: EspectroPartido): string | null {
   if (!espectro.posicao || espectro.bls === null || espectro.blsAno === null) return null;
