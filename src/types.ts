@@ -25,6 +25,12 @@ export interface HistoricoEntry {
   resultado: string;
 }
 
+export interface SituacaoRegistro {
+  julgamento: string;
+  motivos: string[];
+  processo: string | null;
+}
+
 export interface Candidato {
   sq: string;
   numero: number;
@@ -43,6 +49,7 @@ export interface Candidato {
   redes: string[];
   historico: HistoricoEntry[];
   mandato: string | null;
+  situacao: SituacaoRegistro | null;
   nota: string | null;
   foto: string | null;
   proposta: string | null;

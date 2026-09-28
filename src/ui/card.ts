@@ -41,6 +41,9 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   cabecalho.appendChild(identidade);
   card.appendChild(cabecalho);
 
+  const badge = renderBadgeSituacao(candidato);
+  if (badge) card.appendChild(badge);
+
   const resumo = document.createElement("dl");
   resumo.className = "card__resumo";
   adicionarItem(resumo, "Escolaridade", candidato.escolaridade);
@@ -156,6 +159,46 @@ function identificarRede(url: string): { rotulo: string; svg: string } {
   return { rotulo, svg: ICONES[rede] };
 }
 
+interface BadgeSituacao {
+  rotulo: string;
+  variante: "ficha-limpa" | "indeferido" | "recurso" | "pendente";
+}
+
+function badgeSituacao(candidato: Candidato): BadgeSituacao | null {
+  const situacao = candidato.situacao;
+  if (!situacao) return null;
+  const julgamento = situacao.julgamento.toUpperCase();
+  const fichaLimpa = situacao.motivos.some((m) => /LC 64\/90/i.test(m));
+  if (julgamento.includes("INDEFERIDO")) {
+    const sobRecurso = julgamento.includes("RECURSAL");
+    if (fichaLimpa) {
+      return {
+        rotulo: sobRecurso ? "Indeferido sob recurso (Lei da Ficha Limpa)" : "Inelegível (Lei da Ficha Limpa)",
+        variante: "ficha-limpa",
+      };
+    }
+    return {
+      rotulo: sobRecurso ? "Registro indeferido, aguardando recurso" : "Registro indeferido",
+      variante: sobRecurso ? "recurso" : "indeferido",
+    };
+  }
+  if (julgamento.includes("PENDENTE")) return { rotulo: "Registro aguardando julgamento", variante: "pendente" };
+  return null;
+}
+
+export function alertaRegistro(candidato: Candidato): string | null {
+  return badgeSituacao(candidato)?.rotulo ?? null;
+}
+
+function renderBadgeSituacao(candidato: Candidato): HTMLElement | null {
+  const badge = badgeSituacao(candidato);
+  if (!badge) return null;
+  const el = document.createElement("p");
+  el.className = `card__situacao card__situacao--${badge.variante}`;
+  el.textContent = badge.rotulo;
+  return el;
+}
+
 function adicionarItem(lista: HTMLDListElement, termo: string, valor: string): void {
   const dt = document.createElement("dt");
   dt.textContent = termo;
@@ -177,6 +220,36 @@ function renderDetalhes(candidato: Candidato): HTMLElement {
   adicionarItem(info, "Gênero", candidato.genero);
   adicionarItem(info, "Cor/Raça", candidato.corRaca);
   detalhes.appendChild(info);
+
+  if (candidato.situacao) {
+    const tituloSituacao = document.createElement("h4");
+    tituloSituacao.textContent = "Situação do registro";
+    const julgamento = candidato.situacao.julgamento;
+    const textoSituacao = document.createElement("p");
+    textoSituacao.className = "card__registro";
+    textoSituacao.textContent = `Julgamento: ${julgamento.charAt(0)}${julgamento.slice(1).toLowerCase()}.`;
+    detalhes.append(tituloSituacao, textoSituacao);
+    if (candidato.situacao.motivos.length > 0) {
+      const listaMotivos = document.createElement("ul");
+      listaMotivos.className = "card__historico";
+      for (const motivo of candidato.situacao.motivos) {
+        const item = document.createElement("li");
+        item.textContent = motivo;
+        listaMotivos.appendChild(item);
+      }
+      detalhes.appendChild(listaMotivos);
+    }
+    if (candidato.situacao.processo) {
+      const processo = document.createElement("p");
+      processo.className = "card__registro";
+      processo.textContent = `Processo: ${candidato.situacao.processo}`;
+      detalhes.appendChild(processo);
+    }
+    const fonte = document.createElement("p");
+    fonte.className = "card__fonte";
+    fonte.textContent = "Fonte: TSE (DivulgaCand 2026). A situação pode mudar até o fim do prazo recursal.";
+    detalhes.appendChild(fonte);
+  }
 
   if (candidato.historico.length > 0) {
     const tituloHistorico = document.createElement("h4");
