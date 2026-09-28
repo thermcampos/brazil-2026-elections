@@ -3,7 +3,25 @@
 Landing page em frontend puro (Vite + TypeScript + HTML + CSS, sem framework) para
 comparar candidatos às Eleições 2026 em Santa Catarina e à Presidência da República,
 com dados abertos do TSE. Suas escolhas ("Meu voto" e favoritos) ficam salvas apenas
-no `localStorage` do navegador, sem login e sem backend.
+no `localStorage` do navegador, sem login e sem backend. A interface usa as cores da
+bandeira de Santa Catarina.
+
+## Funcionalidades
+
+- **Filtros globais** por partido (com nome completo), posição ideológica do partido,
+  escolaridade, patrimônio declarado, região de nascimento e "Com estrelas"
+  (somente favoritos).
+- **Painel de Exclusões**: regras dinâmicas combinando qualquer campo dos filtros
+  com os operadores `IS` / `IS NOT`. As regras se acumulam com `AND`, podem ser
+  removidas individualmente, são salvas no `localStorage` e atualizam as listas de
+  candidatos na hora.
+- **Cards enriquecidos**: selo de espectro ideológico do partido (índice BLS),
+  região intermediária de SC (classificação IBGE) do município de nascimento,
+  coligação/federação, situação do registro da candidatura com destaque para
+  inelegibilidade pela Lei da Ficha Limpa (LC 64/90) e fotos oficiais do TSE.
+- **Minha colinha**: resumo dos votos na ordem da urna (deputado federal, deputado
+  estadual, senador com 2 vagas, governador e presidente), indicando os cargos
+  ainda pendentes.
 
 ## Como rodar
 
@@ -16,6 +34,19 @@ npm run build        # build de produção em dist/
 
 Os arquivos `.zip` do TSE devem estar na raiz do projeto (não são versionados).
 
+## Docker
+
+A imagem oficial é publicada no Docker Hub em
+[`rmcampos/brazil-2026-elections`](https://hub.docker.com/repository/docker/rmcampos/brazil-2026-elections/general)
+a cada push na `main` (via GitHub Actions, com `nginx` servindo o build estático):
+
+```bash
+docker pull rmcampos/brazil-2026-elections:main
+docker run -p 8080:80 rmcampos/brazil-2026-elections:main
+```
+
+Para buildar localmente: `docker build -t brazil-2026-elections .`
+
 ## Estrutura
 
 ```
@@ -27,8 +58,10 @@ src/
   main.ts                  # bootstrap e orquestração
   types.ts                 # tipos compartilhados (Candidato, Cargo, etc.)
   data.ts                  # carregamento do JSON, busca e formatação
-  storage.ts               # votos e favoritos no localStorage
+  storage.ts               # votos, favoritos e exclusões no localStorage
   ui/card.ts               # card do candidato (resumo + detalhes)
+  ui/filtros.ts            # barra de filtros globais
+  ui/exclusoes.ts          # painel de exclusões dinâmicas (IS / IS NOT)
   ui/secao.ts              # seção por cargo (botão, busca, grade)
   ui/colinha.ts            # resumo final "Minha colinha"
   style.css
