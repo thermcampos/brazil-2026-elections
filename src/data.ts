@@ -98,10 +98,17 @@ export function aplicarFiltros(
   candidatos: Candidato[],
   filtros: Filtros,
   favoritos: string[] = [],
+  notas: Record<string, string> = {},
 ): Candidato[] {
   let resultado = candidatos;
   if (filtros.somenteFavoritos) {
     resultado = resultado.filter((c) => favoritos.includes(c.sq));
+  }
+  if (filtros.somenteComProposta) {
+    resultado = resultado.filter((c) => c.proposta !== null);
+  }
+  if (filtros.somenteComNota) {
+    resultado = resultado.filter((c) => (notas[c.sq] ?? "").trim().length > 0);
   }
   if (filtros.escolaridade) {
     resultado = resultado.filter((c) => c.escolaridade === filtros.escolaridade);

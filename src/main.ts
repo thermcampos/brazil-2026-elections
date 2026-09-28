@@ -71,10 +71,13 @@ async function iniciar(): Promise<void> {
     },
     aoAnotar: (sq: string, texto: string) => {
       estado = definirNota(sq, texto);
+      if (filtros.somenteComNota) {
+        window.dispatchEvent(new Event("filtros-alterados"));
+      }
     },
   };
 
-  const filtros: Filtros = { partido: null, escolaridade: null, patrimonio: null, regiao: null, espectro: null, somenteFavoritos: false };
+  const filtros: Filtros = { partido: null, escolaridade: null, patrimonio: null, regiao: null, espectro: null, somenteFavoritos: false, somenteComProposta: false, somenteComNota: false };
   const barraFiltros = renderFiltros(dados, filtros, {
     aoMudar: () => window.dispatchEvent(new Event("filtros-alterados")),
   });
@@ -88,7 +91,7 @@ async function iniciar(): Promise<void> {
   });
 
   const secoes = dados.cargos.map((cargo) =>
-    renderSecao(cargo, estado, acoes, () => filtros, () => estado.favoritos, () => exclusoes),
+    renderSecao(cargo, estado, acoes, () => filtros, () => estado.favoritos, () => exclusoes, () => estado.notas),
   );
   const colinha = renderColinha(dados, estado, { aoLimpar });
   app.replaceChildren(barraFiltros, painelExclusoes, ...secoes, colinha);

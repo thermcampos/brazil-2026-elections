@@ -9,6 +9,7 @@ export function renderSecao(
   obterFiltros: () => Filtros,
   obterFavoritos: () => string[],
   obterExclusoes: () => Exclusao[],
+  obterNotas: () => Record<string, string>,
 ): HTMLElement {
   const secao = document.createElement("section");
   secao.className = "secao";
@@ -43,6 +44,7 @@ export function renderSecao(
         filtrarCandidatos(cargo.candidatos, busca?.value ?? ""),
         obterFiltros(),
         obterFavoritos(),
+        obterNotas(),
       ),
       obterExclusoes(),
     );

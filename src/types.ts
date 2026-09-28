@@ -108,6 +108,8 @@ export interface Filtros {
   regiao: string | null;
   espectro: PosicaoIdeologica | null;
   somenteFavoritos: boolean;
+  somenteComProposta: boolean;
+  somenteComNota: boolean;
 }
 
 export type CampoExclusao =

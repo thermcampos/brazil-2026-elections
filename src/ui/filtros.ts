@@ -117,6 +117,32 @@ export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFi
   rotuloFavoritos.textContent = "Com estrelas";
   grupoFavoritos.append(checkboxFavoritos, rotuloFavoritos);
 
-  barra.append(grupoPartido, grupoEspectro, grupoEscolaridade, grupoPatrimonio, grupoRegiao, grupoFavoritos);
+  const grupoProposta = document.createElement("label");
+  grupoProposta.className = "filtros__grupo filtros__grupo--checkbox";
+  const checkboxProposta = document.createElement("input");
+  checkboxProposta.type = "checkbox";
+  checkboxProposta.checked = filtros.somenteComProposta;
+  checkboxProposta.addEventListener("change", () => {
+    filtros.somenteComProposta = checkboxProposta.checked;
+    acoes.aoMudar(filtros);
+  });
+  const rotuloProposta = document.createElement("span");
+  rotuloProposta.textContent = "Com proposta de governo";
+  grupoProposta.append(checkboxProposta, rotuloProposta);
+
+  const grupoNota = document.createElement("label");
+  grupoNota.className = "filtros__grupo filtros__grupo--checkbox";
+  const checkboxNota = document.createElement("input");
+  checkboxNota.type = "checkbox";
+  checkboxNota.checked = filtros.somenteComNota;
+  checkboxNota.addEventListener("change", () => {
+    filtros.somenteComNota = checkboxNota.checked;
+    acoes.aoMudar(filtros);
+  });
+  const rotuloNota = document.createElement("span");
+  rotuloNota.textContent = "Com anotações";
+  grupoNota.append(checkboxNota, rotuloNota);
+
+  barra.append(grupoPartido, grupoEspectro, grupoEscolaridade, grupoPatrimonio, grupoRegiao, grupoFavoritos, grupoProposta, grupoNota);
   return barra;
 }
