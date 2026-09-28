@@ -1,5 +1,6 @@
 import { chavesVoto } from "../storage";
 import type { BaseDados, EstadoUsuario } from "../types";
+import { alertaRegistro } from "./card";
 
 export interface AcoesColinha {
   aoLimpar: () => void;
@@ -9,6 +10,7 @@ interface Slot {
   rotulo: string;
   digitos: number;
   escolhido: string | null;
+  alerta: string | null;
 }
 
 export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: AcoesColinha): HTMLElement {
@@ -28,6 +30,7 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
         escolhido: candidato
           ? `${candidato.numero} — ${candidato.nomeUrna} (${candidato.partido.sigla})`
           : null,
+        alerta: candidato ? alertaRegistro(candidato) : null,
       });
     });
   }
@@ -54,6 +57,12 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
     const dd = document.createElement("dd");
     if (slot.escolhido) {
       dd.textContent = slot.escolhido;
+      if (slot.alerta) {
+        const aviso = document.createElement("span");
+        aviso.className = "colinha__alerta";
+        aviso.textContent = ` (${slot.alerta})`;
+        dd.appendChild(aviso);
+      }
     } else {
       dd.textContent = "Ainda não escolhido";
       dd.className = "colinha__pendente";

@@ -315,6 +315,49 @@ main {
   font-size: 0.88rem;
 }
 
+.card__situacao {
+  margin: 0;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.card__situacao--ficha-limpa,
+.card__situacao--indeferido {
+  background: #fbeae8;
+  color: var(--perigo);
+  border: 1px solid #eec4c0;
+}
+
+.card__situacao--recurso {
+  background: #fdf6e0;
+  color: #7c6414;
+  border: 1px solid var(--destaque);
+}
+
+.card__situacao--pendente {
+  background: #eef1f4;
+  color: var(--texto-suave);
+  border: 1px solid var(--borda);
+}
+
+.card__registro {
+  margin: 0.15rem 0;
+}
+
+.card__fonte {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.colinha__alerta {
+  color: var(--perigo);
+  font-weight: 600;
+}
+
 .card__historico {
   margin: 0;
   padding-left: 1.2rem;

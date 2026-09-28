@@ -190,6 +190,33 @@ for (const [sq, lista] of historicoPorSq) {
   );
 }
 
+console.log("Lendo situação de julgamento...");
+const complementar = [
+  ...parseCsv(unzipTexto("consulta_cand_complementar_2026.zip", `consulta_cand_complementar_2026_${UF}.csv`)),
+  ...parseCsv(unzipTexto("consulta_cand_complementar_2026.zip", "consulta_cand_complementar_2026_BRASIL.csv")),
+];
+const julgamentoPorSq = new Map<string, { julgamento: string; processo: string | null }>();
+for (const r of complementar) {
+  const sq = r["SQ_CANDIDATO"];
+  const julgamento = limpo(r["DS_SITUACAO_JULGAMENTO"] ?? "");
+  if (!sq || !julgamento) continue;
+  julgamentoPorSq.set(sq, { julgamento, processo: limpo(r["NR_PROCESSO"] ?? "") });
+}
+
+const motivosCassacao = [
+  ...parseCsv(unzipTexto("motivo_cassacao_2026.zip", `motivo_cassacao_2026_${UF}.csv`)),
+  ...parseCsv(unzipTexto("motivo_cassacao_2026.zip", "motivo_cassacao_2026_BRASIL.csv")),
+];
+const motivosPorSq = new Map<string, string[]>();
+for (const m of motivosCassacao) {
+  const sq = m["SQ_CANDIDATO"];
+  const motivo = (m["DS_MOTIVO"] ?? "").trim().replace(/(\S)\(/, "$1 (");
+  if (!sq || !motivo) continue;
+  const lista = motivosPorSq.get(sq) ?? [];
+  if (!lista.includes(motivo)) lista.push(motivo);
+  motivosPorSq.set(sq, lista);
+}
+
 function eleito(resultado: string): boolean {
   return /ELEITO/i.test(resultado) && !/N[ÃA]O ELEITO/i.test(resultado.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
 }
@@ -259,6 +286,7 @@ function montarCandidato(r: Record<string, string>): Candidato {
   const sq = r["SQ_CANDIDATO"];
   const listaBens = (bensPorSq.get(sq) ?? []).sort((a, b) => b.valor - a.valor);
   const registros = historicoPorSq.get(sq) ?? [];
+  const julgamento = julgamentoPorSq.get(sq);
   const historicoCandidato: HistoricoEntry[] = registros.map((h) => ({
     ano: h.ano,
     cargo: h.cargo,
@@ -288,6 +316,9 @@ function montarCandidato(r: Record<string, string>): Candidato {
     redes: redesPorSq.get(sq) ?? [],
     historico: historicoCandidato,
     mandato: mandatoAtual(registros),
+    situacao: julgamento
+      ? { julgamento: julgamento.julgamento, motivos: motivosPorSq.get(sq) ?? [], processo: julgamento.processo }
+      : null,
     nota: null,
     foto: fotosPorSq.get(sq) ?? fotoPresidente(r["NM_URNA_CANDIDATO"] ?? ""),
     proposta: propostasPorSq.get(sq) ?? null,
