@@ -17,6 +17,20 @@ export interface Partido {
   nome: string;
 }
 
+export type PosicaoIdeologica =
+  | "esquerda"
+  | "centro-esquerda"
+  | "centro"
+  | "centro-direita"
+  | "direita";
+
+export interface EspectroPartido {
+  bls: number | null;
+  blsAno: number | null;
+  posicao: PosicaoIdeologica | null;
+  nota?: string;
+}
+
 export interface HistoricoEntry {
   ano: number;
   cargo: string;
@@ -54,6 +68,7 @@ export interface Candidato {
   mandato: string | null;
   situacao: SituacaoRegistro | null;
   nota: string | null;
+  espectro: EspectroPartido | null;
   foto: string | null;
   proposta: string | null;
 }

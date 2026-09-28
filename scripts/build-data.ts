@@ -372,6 +372,7 @@ function montarCandidato(r: Record<string, string>): Candidato {
       ? { julgamento: julgamento.julgamento, motivos: motivosPorSq.get(sq) ?? [], processo: julgamento.processo }
       : null,
     nota: null,
+    espectro: null,
     foto: fotosPorSq.get(sq) ?? fotoPresidente(r["NM_URNA_CANDIDATO"] ?? ""),
     proposta: propostasPorSq.get(sq) ?? null,
   };

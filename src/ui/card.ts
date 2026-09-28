@@ -1,6 +1,20 @@
 import { formatarMoeda, formatarNomePartido } from "../data";
 import { rotuloVoto } from "../storage";
-import type { Candidato, CargoId, EstadoUsuario } from "../types";
+import type { Candidato, CargoId, EspectroPartido, EstadoUsuario, PosicaoIdeologica } from "../types";
+
+const ROTULOS_ESPECTRO: Record<PosicaoIdeologica, string> = {
+  esquerda: "Esquerda",
+  "centro-esquerda": "Centro-esquerda",
+  centro: "Centro",
+  "centro-direita": "Centro-direita",
+  direita: "Direita",
+};
+
+function textoEspectro(espectro: EspectroPartido): string | null {
+  if (!espectro.posicao || espectro.bls === null || espectro.blsAno === null) return null;
+  const rotulo = ROTULOS_ESPECTRO[espectro.posicao];
+  return `${rotulo} (BLS ${espectro.blsAno}: ${espectro.bls.toLocaleString("pt-BR")})`;
+}
 
 export interface AcoesCard {
   aoVotar: (cargo: CargoId, sq: string) => void;
@@ -45,6 +59,13 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
     partido.className = "card__partido";
     partido.textContent = nomePartido;
     identidade.appendChild(partido);
+  }
+  if (candidato.espectro?.posicao) {
+    const espectro = document.createElement("span");
+    espectro.className = `card__espectro card__espectro--${candidato.espectro.posicao}`;
+    espectro.textContent = ROTULOS_ESPECTRO[candidato.espectro.posicao];
+    espectro.title = textoEspectro(candidato.espectro) ?? "";
+    identidade.appendChild(espectro);
   }
   cabecalho.appendChild(identidade);
   card.appendChild(cabecalho);
@@ -218,11 +239,12 @@ function renderBadgeSituacao(candidato: Candidato): HTMLElement | null {
   return el;
 }
 
-function adicionarItem(lista: HTMLDListElement, termo: string, valor: string): void {
+function adicionarItem(lista: HTMLDListElement, termo: string, valor: string, titulo?: string): void {
   const dt = document.createElement("dt");
   dt.textContent = termo;
   const dd = document.createElement("dd");
   dd.textContent = valor;
+  if (titulo) dd.title = titulo;
   lista.append(dt, dd);
 }
 
@@ -234,6 +256,10 @@ function renderDetalhes(candidato: Candidato): HTMLElement {
   info.className = "card__resumo";
   adicionarItem(info, "Nome completo", candidato.nomeCompleto);
   adicionarItem(info, "Partido", `${candidato.partido.sigla} - ${formatarNomePartido(candidato.partido.nome)}`);
+  if (candidato.espectro?.posicao) {
+    const texto = textoEspectro(candidato.espectro);
+    if (texto) adicionarItem(info, "Posição do partido", texto, candidato.espectro.nota);
+  }
   if (candidato.coligacao) adicionarItem(info, "Coligação", candidato.coligacao);
   if (candidato.federacao) adicionarItem(info, "Federação", candidato.federacao);
   adicionarItem(info, "Gênero", candidato.genero);

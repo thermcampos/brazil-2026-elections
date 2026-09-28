@@ -1,4 +1,4 @@
-import type { BaseDados, Candidato, Filtros } from "./types";
+import type { BaseDados, Candidato, EspectroPartido, Filtros } from "./types";
 
 export async function carregarDados(): Promise<BaseDados> {
   const resposta = await fetch("data/candidatos.json");
@@ -7,12 +7,24 @@ export async function carregarDados(): Promise<BaseDados> {
   }
   const dados = (await resposta.json()) as BaseDados;
   const notas = await carregarNotas();
+  const espectro = await carregarEspectro();
   for (const cargo of dados.cargos) {
     for (const candidato of cargo.candidatos) {
       candidato.nota = notas[candidato.sq] ?? null;
+      candidato.espectro = espectro[candidato.partido.sigla] ?? null;
     }
   }
   return dados;
+}
+
+async function carregarEspectro(): Promise<Record<string, EspectroPartido>> {
+  try {
+    const resposta = await fetch("data/espectro.json");
+    if (!resposta.ok) return {};
+    return (await resposta.json()) as Record<string, EspectroPartido>;
+  } catch {
+    return {};
+  }
 }
 
 async function carregarNotas(): Promise<Record<string, string>> {

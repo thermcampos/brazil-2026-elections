@@ -253,6 +253,46 @@ main {
   font-size: 0.8rem;
 }
 
+.card__espectro {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.card__espectro--esquerda {
+  background: #fbe3e3;
+  color: #a12622;
+  border-color: #efc3c2;
+}
+
+.card__espectro--centro-esquerda {
+  background: #fdf1e3;
+  color: #9a5b00;
+  border-color: #f0d9b5;
+}
+
+.card__espectro--centro {
+  background: #eef1f4;
+  color: #5a6572;
+  border-color: var(--borda);
+}
+
+.card__espectro--centro-direita {
+  background: #e3eefb;
+  color: #1d4e89;
+  border-color: #c3d8f0;
+}
+
+.card__espectro--direita {
+  background: #dfe7f6;
+  color: #16305e;
+  border-color: #bccbe8;
+}
+
 .card__resumo {
   margin: 0;
   display: grid;
