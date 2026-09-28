@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, writeFileSync, readdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import type { Bem, Candidato, Cargo, CargoId, BaseDados, HistoricoEntry } from "../src/types";
 
@@ -72,6 +72,29 @@ function limpo(valor: string): string | null {
   const v = valor.trim();
   if (!v || v === "#NULO" || v === "#NE" || v === "-1" || v === "-3" || v === "-4") return null;
   return v;
+}
+
+function normalizarMunicipio(texto: string): string {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['’‘]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const regioesSC = JSON.parse(
+  readFileSync("scripts/regioes-sc.json", "utf8"),
+) as Record<string, { nome: string; regiao: string }>;
+
+function capitalizarNome(texto: string): string {
+  const minusculas = new Set(["de", "da", "do", "das", "dos", "e"]);
+  return texto
+    .toLowerCase()
+    .split(" ")
+    .map((palavra, i) => (i > 0 && minusculas.has(palavra) ? palavra : palavra.charAt(0).toUpperCase() + palavra.slice(1)))
+    .join(" ");
 }
 
 console.log("Lendo candidatos...");
@@ -196,10 +219,14 @@ const complementar = [
   ...parseCsv(unzipTexto("consulta_cand_complementar_2026.zip", "consulta_cand_complementar_2026_BRASIL.csv")),
 ];
 const julgamentoPorSq = new Map<string, { julgamento: string; processo: string | null }>();
+const municipioNascimentoPorSq = new Map<string, string>();
 for (const r of complementar) {
   const sq = r["SQ_CANDIDATO"];
+  if (!sq) continue;
+  const municipioNascimento = limpo(r["NM_MUNICIPIO_NASCIMENTO"] ?? "");
+  if (municipioNascimento) municipioNascimentoPorSq.set(sq, municipioNascimento);
   const julgamento = limpo(r["DS_SITUACAO_JULGAMENTO"] ?? "");
-  if (!sq || !julgamento) continue;
+  if (!julgamento) continue;
   julgamentoPorSq.set(sq, { julgamento, processo: limpo(r["NR_PROCESSO"] ?? "") });
 }
 
@@ -294,6 +321,22 @@ function montarCandidato(r: Record<string, string>): Candidato {
     partido: h.partido,
     resultado: h.resultado,
   }));
+  const ufNascimento = limpo(r["SG_UF_NASCIMENTO"] ?? "");
+  const municipioBruto = municipioNascimentoPorSq.get(sq) ?? null;
+  let municipioNascimento: string | null = null;
+  let regiao: string | null = null;
+  if (municipioBruto) {
+    const entrada = ufNascimento === UF ? regioesSC[normalizarMunicipio(municipioBruto)] : undefined;
+    if (entrada) {
+      municipioNascimento = entrada.nome;
+      regiao = entrada.regiao;
+    } else {
+      municipioNascimento = capitalizarNome(municipioBruto);
+      if (ufNascimento === UF) {
+        console.warn(`  Município de nascimento sem região mapeada: ${municipioBruto} (${r["NM_URNA_CANDIDATO"] ?? sq})`);
+      }
+    }
+  }
   return {
     sq,
     numero: Number(r["NR_CANDIDATO"]),
@@ -308,6 +351,9 @@ function montarCandidato(r: Record<string, string>): Candidato {
     federacao: limpo(r["NM_FEDERACAO"] ?? ""),
     escolaridade: r["DS_GRAU_INSTRUCAO"] ?? "",
     ocupacao: limpo(r["DS_OCUPACAO"] ?? "") ?? "Não informada",
+    municipioNascimento,
+    ufNascimento,
+    regiao,
     idade: idade(r["DT_NASCIMENTO"] ?? ""),
     genero: r["DS_GENERO"] ?? "",
     corRaca: r["DS_COR_RACA"] ?? "",

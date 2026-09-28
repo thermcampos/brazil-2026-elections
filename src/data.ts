@@ -70,7 +70,23 @@ export function aplicarFiltros(
         ? resultado.filter((c) => c.patrimonioTotal === 0)
         : resultado.filter((c) => c.patrimonioTotal > min && c.patrimonioTotal <= max);
   }
+  if (filtros.regiao) {
+    resultado =
+      filtros.regiao === "__fora__"
+        ? resultado.filter((c) => c.regiao === null)
+        : resultado.filter((c) => c.regiao === filtros.regiao);
+  }
   return resultado;
+}
+
+export function regioesDisponiveis(dados: BaseDados): string[] {
+  const valores = new Set<string>();
+  for (const cargo of dados.cargos) {
+    for (const candidato of cargo.candidatos) {
+      if (candidato.regiao) valores.add(candidato.regiao);
+    }
+  }
+  return [...valores].sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
 export function escolaridadesDisponiveis(dados: BaseDados): string[] {

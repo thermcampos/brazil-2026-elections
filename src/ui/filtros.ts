@@ -1,4 +1,4 @@
-import { escolaridadesDisponiveis } from "../data";
+import { escolaridadesDisponiveis, regioesDisponiveis } from "../data";
 import type { BaseDados, FaixaPatrimonio, Filtros } from "../types";
 
 export const ROTULOS_PATRIMONIO: Record<FaixaPatrimonio, string> = {
@@ -51,6 +51,23 @@ export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFi
   });
   grupoPatrimonio.append(rotuloPatrimonio, selectPatrimonio);
 
+  const grupoRegiao = document.createElement("label");
+  grupoRegiao.className = "filtros__grupo";
+  const rotuloRegiao = document.createElement("span");
+  rotuloRegiao.textContent = "Região de nascimento";
+  const selectRegiao = document.createElement("select");
+  selectRegiao.appendChild(new Option("Todas", ""));
+  for (const regiao of regioesDisponiveis(dados)) {
+    selectRegiao.appendChild(new Option(regiao, regiao));
+  }
+  selectRegiao.appendChild(new Option("Fora de SC", "__fora__"));
+  selectRegiao.value = filtros.regiao ?? "";
+  selectRegiao.addEventListener("change", () => {
+    filtros.regiao = selectRegiao.value || null;
+    acoes.aoMudar(filtros);
+  });
+  grupoRegiao.append(rotuloRegiao, selectRegiao);
+
   const grupoFavoritos = document.createElement("label");
   grupoFavoritos.className = "filtros__grupo filtros__grupo--checkbox";
   const checkboxFavoritos = document.createElement("input");
@@ -64,6 +81,6 @@ export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFi
   rotuloFavoritos.textContent = "Com estrelas";
   grupoFavoritos.append(checkboxFavoritos, rotuloFavoritos);
 
-  barra.append(grupoEscolaridade, grupoPatrimonio, grupoFavoritos);
+  barra.append(grupoEscolaridade, grupoPatrimonio, grupoRegiao, grupoFavoritos);
   return barra;
 }

@@ -41,6 +41,9 @@ export interface Candidato {
   federacao: string | null;
   escolaridade: string;
   ocupacao: string;
+  municipioNascimento: string | null;
+  ufNascimento: string | null;
+  regiao: string | null;
   idade: number | null;
   genero: string;
   corRaca: string;
@@ -85,5 +88,6 @@ export type FaixaPatrimonio =
 export interface Filtros {
   escolaridade: string | null;
   patrimonio: FaixaPatrimonio | null;
+  regiao: string | null;
   somenteFavoritos: boolean;
 }

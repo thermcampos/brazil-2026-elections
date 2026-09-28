@@ -48,6 +48,8 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   resumo.className = "card__resumo";
   adicionarItem(resumo, "Escolaridade", candidato.escolaridade);
   adicionarItem(resumo, "Ocupação", candidato.ocupacao);
+  const naturalidade = textoNaturalidade(candidato);
+  if (naturalidade) adicionarItem(resumo, "Naturalidade", naturalidade);
   adicionarItem(resumo, "Patrimônio declarado", formatarMoeda(candidato.patrimonioTotal));
   if (candidato.idade !== null) adicionarItem(resumo, "Idade", `${candidato.idade} anos`);
   if (candidato.mandato) adicionarItem(resumo, "Mandato atual", candidato.mandato);
@@ -112,6 +114,15 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   card.appendChild(detalhes);
 
   return card;
+}
+
+function textoNaturalidade(candidato: Candidato): string | null {
+  const { municipioNascimento: municipio, ufNascimento: uf, regiao } = candidato;
+  if (municipio && regiao) return `${municipio} (região de ${regiao})`;
+  if (municipio && uf && uf !== "SC") return `${municipio} (${uf})`;
+  if (municipio) return municipio;
+  if (uf && uf !== "SC") return `Fora de SC (${uf})`;
+  return null;
 }
 
 const SVG = (conteudo: string): string =>

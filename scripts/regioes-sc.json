@@ -1,0 +1,1182 @@
+{
+  "aguas mornas": {
+    "nome": "Águas Mornas",
+    "regiao": "Florianópolis"
+  },
+  "alfredo wagner": {
+    "nome": "Alfredo Wagner",
+    "regiao": "Florianópolis"
+  },
+  "angelina": {
+    "nome": "Angelina",
+    "regiao": "Florianópolis"
+  },
+  "anitapolis": {
+    "nome": "Anitápolis",
+    "regiao": "Florianópolis"
+  },
+  "antonio carlos": {
+    "nome": "Antônio Carlos",
+    "regiao": "Florianópolis"
+  },
+  "biguacu": {
+    "nome": "Biguaçu",
+    "regiao": "Florianópolis"
+  },
+  "florianopolis": {
+    "nome": "Florianópolis",
+    "regiao": "Florianópolis"
+  },
+  "garopaba": {
+    "nome": "Garopaba",
+    "regiao": "Florianópolis"
+  },
+  "governador celso ramos": {
+    "nome": "Governador Celso Ramos",
+    "regiao": "Florianópolis"
+  },
+  "imbituba": {
+    "nome": "Imbituba",
+    "regiao": "Florianópolis"
+  },
+  "palhoca": {
+    "nome": "Palhoça",
+    "regiao": "Florianópolis"
+  },
+  "paulo lopes": {
+    "nome": "Paulo Lopes",
+    "regiao": "Florianópolis"
+  },
+  "rancho queimado": {
+    "nome": "Rancho Queimado",
+    "regiao": "Florianópolis"
+  },
+  "santo amaro da imperatriz": {
+    "nome": "Santo Amaro da Imperatriz",
+    "regiao": "Florianópolis"
+  },
+  "sao bonifacio": {
+    "nome": "São Bonifácio",
+    "regiao": "Florianópolis"
+  },
+  "sao jose": {
+    "nome": "São José",
+    "regiao": "Florianópolis"
+  },
+  "sao pedro de alcantara": {
+    "nome": "São Pedro de Alcântara",
+    "regiao": "Florianópolis"
+  },
+  "ararangua": {
+    "nome": "Araranguá",
+    "regiao": "Criciúma"
+  },
+  "armazem": {
+    "nome": "Armazém",
+    "regiao": "Criciúma"
+  },
+  "balneario arroio do silva": {
+    "nome": "Balneário Arroio do Silva",
+    "regiao": "Criciúma"
+  },
+  "balneario gaivota": {
+    "nome": "Balneário Gaivota",
+    "regiao": "Criciúma"
+  },
+  "braco do norte": {
+    "nome": "Braço do Norte",
+    "regiao": "Criciúma"
+  },
+  "capivari de baixo": {
+    "nome": "Capivari de Baixo",
+    "regiao": "Criciúma"
+  },
+  "cocal do sul": {
+    "nome": "Cocal do Sul",
+    "regiao": "Criciúma"
+  },
+  "criciuma": {
+    "nome": "Criciúma",
+    "regiao": "Criciúma"
+  },
+  "ermo": {
+    "nome": "Ermo",
+    "regiao": "Criciúma"
+  },
+  "forquilhinha": {
+    "nome": "Forquilhinha",
+    "regiao": "Criciúma"
+  },
+  "grao-para": {
+    "nome": "Grão-Pará",
+    "regiao": "Criciúma"
+  },
+  "gravatal": {
+    "nome": "Gravatal",
+    "regiao": "Criciúma"
+  },
+  "icara": {
+    "nome": "Içara",
+    "regiao": "Criciúma"
+  },
+  "imarui": {
+    "nome": "Imaruí",
+    "regiao": "Criciúma"
+  },
+  "jacinto machado": {
+    "nome": "Jacinto Machado",
+    "regiao": "Criciúma"
+  },
+  "jaguaruna": {
+    "nome": "Jaguaruna",
+    "regiao": "Criciúma"
+  },
+  "laguna": {
+    "nome": "Laguna",
+    "regiao": "Criciúma"
+  },
+  "lauro muller": {
+    "nome": "Lauro Müller",
+    "regiao": "Criciúma"
+  },
+  "maracaja": {
+    "nome": "Maracajá",
+    "regiao": "Criciúma"
+  },
+  "meleiro": {
+    "nome": "Meleiro",
+    "regiao": "Criciúma"
+  },
+  "morro da fumaca": {
+    "nome": "Morro da Fumaça",
+    "regiao": "Criciúma"
+  },
+  "morro grande": {
+    "nome": "Morro Grande",
+    "regiao": "Criciúma"
+  },
+  "nova veneza": {
+    "nome": "Nova Veneza",
+    "regiao": "Criciúma"
+  },
+  "orleans": {
+    "nome": "Orleans",
+    "regiao": "Criciúma"
+  },
+  "passo de torres": {
+    "nome": "Passo de Torres",
+    "regiao": "Criciúma"
+  },
+  "pedras grandes": {
+    "nome": "Pedras Grandes",
+    "regiao": "Criciúma"
+  },
+  "pescaria brava": {
+    "nome": "Pescaria Brava",
+    "regiao": "Criciúma"
+  },
+  "praia grande": {
+    "nome": "Praia Grande",
+    "regiao": "Criciúma"
+  },
+  "rio fortuna": {
+    "nome": "Rio Fortuna",
+    "regiao": "Criciúma"
+  },
+  "sangao": {
+    "nome": "Sangão",
+    "regiao": "Criciúma"
+  },
+  "santa rosa de lima": {
+    "nome": "Santa Rosa de Lima",
+    "regiao": "Criciúma"
+  },
+  "santa rosa do sul": {
+    "nome": "Santa Rosa do Sul",
+    "regiao": "Criciúma"
+  },
+  "sao joao do sul": {
+    "nome": "São João do Sul",
+    "regiao": "Criciúma"
+  },
+  "sao ludgero": {
+    "nome": "São Ludgero",
+    "regiao": "Criciúma"
+  },
+  "sao martinho": {
+    "nome": "São Martinho",
+    "regiao": "Criciúma"
+  },
+  "sideropolis": {
+    "nome": "Siderópolis",
+    "regiao": "Criciúma"
+  },
+  "sombrio": {
+    "nome": "Sombrio",
+    "regiao": "Criciúma"
+  },
+  "timbe do sul": {
+    "nome": "Timbé do Sul",
+    "regiao": "Criciúma"
+  },
+  "treviso": {
+    "nome": "Treviso",
+    "regiao": "Criciúma"
+  },
+  "treze de maio": {
+    "nome": "Treze de Maio",
+    "regiao": "Criciúma"
+  },
+  "tubarao": {
+    "nome": "Tubarão",
+    "regiao": "Criciúma"
+  },
+  "turvo": {
+    "nome": "Turvo",
+    "regiao": "Criciúma"
+  },
+  "urussanga": {
+    "nome": "Urussanga",
+    "regiao": "Criciúma"
+  },
+  "balneario rincao": {
+    "nome": "Balneário Rincão",
+    "regiao": "Criciúma"
+  },
+  "anita garibaldi": {
+    "nome": "Anita Garibaldi",
+    "regiao": "Lages"
+  },
+  "bocaina do sul": {
+    "nome": "Bocaina do Sul",
+    "regiao": "Lages"
+  },
+  "bom jardim da serra": {
+    "nome": "Bom Jardim da Serra",
+    "regiao": "Lages"
+  },
+  "bom retiro": {
+    "nome": "Bom Retiro",
+    "regiao": "Lages"
+  },
+  "brunopolis": {
+    "nome": "Brunópolis",
+    "regiao": "Lages"
+  },
+  "capao alto": {
+    "nome": "Capão Alto",
+    "regiao": "Lages"
+  },
+  "campo belo do sul": {
+    "nome": "Campo Belo do Sul",
+    "regiao": "Lages"
+  },
+  "cerro negro": {
+    "nome": "Cerro Negro",
+    "regiao": "Lages"
+  },
+  "correia pinto": {
+    "nome": "Correia Pinto",
+    "regiao": "Lages"
+  },
+  "curitibanos": {
+    "nome": "Curitibanos",
+    "regiao": "Lages"
+  },
+  "frei rogerio": {
+    "nome": "Frei Rogério",
+    "regiao": "Lages"
+  },
+  "lages": {
+    "nome": "Lages",
+    "regiao": "Lages"
+  },
+  "otacilio costa": {
+    "nome": "Otacílio Costa",
+    "regiao": "Lages"
+  },
+  "painel": {
+    "nome": "Painel",
+    "regiao": "Lages"
+  },
+  "palmeira": {
+    "nome": "Palmeira",
+    "regiao": "Lages"
+  },
+  "ponte alta": {
+    "nome": "Ponte Alta",
+    "regiao": "Lages"
+  },
+  "ponte alta do norte": {
+    "nome": "Ponte Alta do Norte",
+    "regiao": "Lages"
+  },
+  "rio rufino": {
+    "nome": "Rio Rufino",
+    "regiao": "Lages"
+  },
+  "santa cecilia": {
+    "nome": "Santa Cecília",
+    "regiao": "Lages"
+  },
+  "sao cristovao do sul": {
+    "nome": "São Cristóvão do Sul",
+    "regiao": "Lages"
+  },
+  "sao joaquim": {
+    "nome": "São Joaquim",
+    "regiao": "Lages"
+  },
+  "sao jose do cerrito": {
+    "nome": "São José do Cerrito",
+    "regiao": "Lages"
+  },
+  "urubici": {
+    "nome": "Urubici",
+    "regiao": "Lages"
+  },
+  "urupema": {
+    "nome": "Urupema",
+    "regiao": "Lages"
+  },
+  "abdon batista": {
+    "nome": "Abdon Batista",
+    "regiao": "Chapecó"
+  },
+  "abelardo luz": {
+    "nome": "Abelardo Luz",
+    "regiao": "Chapecó"
+  },
+  "agua doce": {
+    "nome": "Água Doce",
+    "regiao": "Chapecó"
+  },
+  "aguas de chapeco": {
+    "nome": "Águas de Chapecó",
+    "regiao": "Chapecó"
+  },
+  "aguas frias": {
+    "nome": "Águas Frias",
+    "regiao": "Chapecó"
+  },
+  "alto bela vista": {
+    "nome": "Alto Bela Vista",
+    "regiao": "Chapecó"
+  },
+  "anchieta": {
+    "nome": "Anchieta",
+    "regiao": "Chapecó"
+  },
+  "arabuta": {
+    "nome": "Arabutã",
+    "regiao": "Chapecó"
+  },
+  "arvoredo": {
+    "nome": "Arvoredo",
+    "regiao": "Chapecó"
+  },
+  "bandeirante": {
+    "nome": "Bandeirante",
+    "regiao": "Chapecó"
+  },
+  "barra bonita": {
+    "nome": "Barra Bonita",
+    "regiao": "Chapecó"
+  },
+  "belmonte": {
+    "nome": "Belmonte",
+    "regiao": "Chapecó"
+  },
+  "bom jesus": {
+    "nome": "Bom Jesus",
+    "regiao": "Chapecó"
+  },
+  "bom jesus do oeste": {
+    "nome": "Bom Jesus do Oeste",
+    "regiao": "Chapecó"
+  },
+  "caibi": {
+    "nome": "Caibi",
+    "regiao": "Chapecó"
+  },
+  "campo ere": {
+    "nome": "Campo Erê",
+    "regiao": "Chapecó"
+  },
+  "campos novos": {
+    "nome": "Campos Novos",
+    "regiao": "Chapecó"
+  },
+  "capinzal": {
+    "nome": "Capinzal",
+    "regiao": "Chapecó"
+  },
+  "catanduvas": {
+    "nome": "Catanduvas",
+    "regiao": "Chapecó"
+  },
+  "caxambu do sul": {
+    "nome": "Caxambu do Sul",
+    "regiao": "Chapecó"
+  },
+  "celso ramos": {
+    "nome": "Celso Ramos",
+    "regiao": "Chapecó"
+  },
+  "chapeco": {
+    "nome": "Chapecó",
+    "regiao": "Chapecó"
+  },
+  "concordia": {
+    "nome": "Concórdia",
+    "regiao": "Chapecó"
+  },
+  "cordilheira alta": {
+    "nome": "Cordilheira Alta",
+    "regiao": "Chapecó"
+  },
+  "coronel freitas": {
+    "nome": "Coronel Freitas",
+    "regiao": "Chapecó"
+  },
+  "coronel martins": {
+    "nome": "Coronel Martins",
+    "regiao": "Chapecó"
+  },
+  "cunha pora": {
+    "nome": "Cunha Porã",
+    "regiao": "Chapecó"
+  },
+  "cunhatai": {
+    "nome": "Cunhataí",
+    "regiao": "Chapecó"
+  },
+  "descanso": {
+    "nome": "Descanso",
+    "regiao": "Chapecó"
+  },
+  "dionisio cerqueira": {
+    "nome": "Dionísio Cerqueira",
+    "regiao": "Chapecó"
+  },
+  "entre rios": {
+    "nome": "Entre Rios",
+    "regiao": "Chapecó"
+  },
+  "erval velho": {
+    "nome": "Erval Velho",
+    "regiao": "Chapecó"
+  },
+  "faxinal dos guedes": {
+    "nome": "Faxinal dos Guedes",
+    "regiao": "Chapecó"
+  },
+  "flor do sertao": {
+    "nome": "Flor do Sertão",
+    "regiao": "Chapecó"
+  },
+  "formosa do sul": {
+    "nome": "Formosa do Sul",
+    "regiao": "Chapecó"
+  },
+  "galvao": {
+    "nome": "Galvão",
+    "regiao": "Chapecó"
+  },
+  "guaraciaba": {
+    "nome": "Guaraciaba",
+    "regiao": "Chapecó"
+  },
+  "guaruja do sul": {
+    "nome": "Guarujá do Sul",
+    "regiao": "Chapecó"
+  },
+  "guatambu": {
+    "nome": "Guatambú",
+    "regiao": "Chapecó"
+  },
+  "herval d oeste": {
+    "nome": "Herval d'Oeste",
+    "regiao": "Chapecó"
+  },
+  "ibicare": {
+    "nome": "Ibicaré",
+    "regiao": "Chapecó"
+  },
+  "ipira": {
+    "nome": "Ipira",
+    "regiao": "Chapecó"
+  },
+  "ipora do oeste": {
+    "nome": "Iporã do Oeste",
+    "regiao": "Chapecó"
+  },
+  "ipuacu": {
+    "nome": "Ipuaçu",
+    "regiao": "Chapecó"
+  },
+  "ipumirim": {
+    "nome": "Ipumirim",
+    "regiao": "Chapecó"
+  },
+  "iraceminha": {
+    "nome": "Iraceminha",
+    "regiao": "Chapecó"
+  },
+  "irani": {
+    "nome": "Irani",
+    "regiao": "Chapecó"
+  },
+  "irati": {
+    "nome": "Irati",
+    "regiao": "Chapecó"
+  },
+  "ita": {
+    "nome": "Itá",
+    "regiao": "Chapecó"
+  },
+  "itapiranga": {
+    "nome": "Itapiranga",
+    "regiao": "Chapecó"
+  },
+  "jabora": {
+    "nome": "Jaborá",
+    "regiao": "Chapecó"
+  },
+  "jardinopolis": {
+    "nome": "Jardinópolis",
+    "regiao": "Chapecó"
+  },
+  "joacaba": {
+    "nome": "Joaçaba",
+    "regiao": "Chapecó"
+  },
+  "jupia": {
+    "nome": "Jupiá",
+    "regiao": "Chapecó"
+  },
+  "lacerdopolis": {
+    "nome": "Lacerdópolis",
+    "regiao": "Chapecó"
+  },
+  "lajeado grande": {
+    "nome": "Lajeado Grande",
+    "regiao": "Chapecó"
+  },
+  "lindoia do sul": {
+    "nome": "Lindóia do Sul",
+    "regiao": "Chapecó"
+  },
+  "luzerna": {
+    "nome": "Luzerna",
+    "regiao": "Chapecó"
+  },
+  "maravilha": {
+    "nome": "Maravilha",
+    "regiao": "Chapecó"
+  },
+  "marema": {
+    "nome": "Marema",
+    "regiao": "Chapecó"
+  },
+  "modelo": {
+    "nome": "Modelo",
+    "regiao": "Chapecó"
+  },
+  "mondai": {
+    "nome": "Mondaí",
+    "regiao": "Chapecó"
+  },
+  "nova erechim": {
+    "nome": "Nova Erechim",
+    "regiao": "Chapecó"
+  },
+  "nova itaberaba": {
+    "nome": "Nova Itaberaba",
+    "regiao": "Chapecó"
+  },
+  "novo horizonte": {
+    "nome": "Novo Horizonte",
+    "regiao": "Chapecó"
+  },
+  "ouro": {
+    "nome": "Ouro",
+    "regiao": "Chapecó"
+  },
+  "ouro verde": {
+    "nome": "Ouro Verde",
+    "regiao": "Chapecó"
+  },
+  "paial": {
+    "nome": "Paial",
+    "regiao": "Chapecó"
+  },
+  "palma sola": {
+    "nome": "Palma Sola",
+    "regiao": "Chapecó"
+  },
+  "palmitos": {
+    "nome": "Palmitos",
+    "regiao": "Chapecó"
+  },
+  "paraiso": {
+    "nome": "Paraíso",
+    "regiao": "Chapecó"
+  },
+  "passos maia": {
+    "nome": "Passos Maia",
+    "regiao": "Chapecó"
+  },
+  "peritiba": {
+    "nome": "Peritiba",
+    "regiao": "Chapecó"
+  },
+  "pinhalzinho": {
+    "nome": "Pinhalzinho",
+    "regiao": "Chapecó"
+  },
+  "piratuba": {
+    "nome": "Piratuba",
+    "regiao": "Chapecó"
+  },
+  "planalto alegre": {
+    "nome": "Planalto Alegre",
+    "regiao": "Chapecó"
+  },
+  "ponte serrada": {
+    "nome": "Ponte Serrada",
+    "regiao": "Chapecó"
+  },
+  "presidente castello branco": {
+    "nome": "Presidente Castello Branco",
+    "regiao": "Chapecó"
+  },
+  "princesa": {
+    "nome": "Princesa",
+    "regiao": "Chapecó"
+  },
+  "quilombo": {
+    "nome": "Quilombo",
+    "regiao": "Chapecó"
+  },
+  "riqueza": {
+    "nome": "Riqueza",
+    "regiao": "Chapecó"
+  },
+  "romelandia": {
+    "nome": "Romelândia",
+    "regiao": "Chapecó"
+  },
+  "saltinho": {
+    "nome": "Saltinho",
+    "regiao": "Chapecó"
+  },
+  "santa helena": {
+    "nome": "Santa Helena",
+    "regiao": "Chapecó"
+  },
+  "santa terezinha do progresso": {
+    "nome": "Santa Terezinha do Progresso",
+    "regiao": "Chapecó"
+  },
+  "santiago do sul": {
+    "nome": "Santiago do Sul",
+    "regiao": "Chapecó"
+  },
+  "sao bernardino": {
+    "nome": "São Bernardino",
+    "regiao": "Chapecó"
+  },
+  "sao carlos": {
+    "nome": "São Carlos",
+    "regiao": "Chapecó"
+  },
+  "sao domingos": {
+    "nome": "São Domingos",
+    "regiao": "Chapecó"
+  },
+  "sao joao do oeste": {
+    "nome": "São João do Oeste",
+    "regiao": "Chapecó"
+  },
+  "sao jose do cedro": {
+    "nome": "São José do Cedro",
+    "regiao": "Chapecó"
+  },
+  "sao lourenco do oeste": {
+    "nome": "São Lourenço do Oeste",
+    "regiao": "Chapecó"
+  },
+  "sao miguel da boa vista": {
+    "nome": "São Miguel da Boa Vista",
+    "regiao": "Chapecó"
+  },
+  "sao miguel do oeste": {
+    "nome": "São Miguel do Oeste",
+    "regiao": "Chapecó"
+  },
+  "saudades": {
+    "nome": "Saudades",
+    "regiao": "Chapecó"
+  },
+  "seara": {
+    "nome": "Seara",
+    "regiao": "Chapecó"
+  },
+  "serra alta": {
+    "nome": "Serra Alta",
+    "regiao": "Chapecó"
+  },
+  "sul brasil": {
+    "nome": "Sul Brasil",
+    "regiao": "Chapecó"
+  },
+  "tigrinhos": {
+    "nome": "Tigrinhos",
+    "regiao": "Chapecó"
+  },
+  "treze tilias": {
+    "nome": "Treze Tílias",
+    "regiao": "Chapecó"
+  },
+  "tunapolis": {
+    "nome": "Tunápolis",
+    "regiao": "Chapecó"
+  },
+  "uniao do oeste": {
+    "nome": "União do Oeste",
+    "regiao": "Chapecó"
+  },
+  "vargeao": {
+    "nome": "Vargeão",
+    "regiao": "Chapecó"
+  },
+  "vargem": {
+    "nome": "Vargem",
+    "regiao": "Chapecó"
+  },
+  "vargem bonita": {
+    "nome": "Vargem Bonita",
+    "regiao": "Chapecó"
+  },
+  "xanxere": {
+    "nome": "Xanxerê",
+    "regiao": "Chapecó"
+  },
+  "xavantina": {
+    "nome": "Xavantina",
+    "regiao": "Chapecó"
+  },
+  "xaxim": {
+    "nome": "Xaxim",
+    "regiao": "Chapecó"
+  },
+  "zortea": {
+    "nome": "Zortéa",
+    "regiao": "Chapecó"
+  },
+  "arroio trinta": {
+    "nome": "Arroio Trinta",
+    "regiao": "Caçador"
+  },
+  "cacador": {
+    "nome": "Caçador",
+    "regiao": "Caçador"
+  },
+  "calmon": {
+    "nome": "Calmon",
+    "regiao": "Caçador"
+  },
+  "fraiburgo": {
+    "nome": "Fraiburgo",
+    "regiao": "Caçador"
+  },
+  "ibiam": {
+    "nome": "Ibiam",
+    "regiao": "Caçador"
+  },
+  "iomere": {
+    "nome": "Iomerê",
+    "regiao": "Caçador"
+  },
+  "lebon regis": {
+    "nome": "Lebon Régis",
+    "regiao": "Caçador"
+  },
+  "macieira": {
+    "nome": "Macieira",
+    "regiao": "Caçador"
+  },
+  "matos costa": {
+    "nome": "Matos Costa",
+    "regiao": "Caçador"
+  },
+  "monte carlo": {
+    "nome": "Monte Carlo",
+    "regiao": "Caçador"
+  },
+  "pinheiro preto": {
+    "nome": "Pinheiro Preto",
+    "regiao": "Caçador"
+  },
+  "rio das antas": {
+    "nome": "Rio das Antas",
+    "regiao": "Caçador"
+  },
+  "salto veloso": {
+    "nome": "Salto Veloso",
+    "regiao": "Caçador"
+  },
+  "tangara": {
+    "nome": "Tangará",
+    "regiao": "Caçador"
+  },
+  "timbo grande": {
+    "nome": "Timbó Grande",
+    "regiao": "Caçador"
+  },
+  "videira": {
+    "nome": "Videira",
+    "regiao": "Caçador"
+  },
+  "araquari": {
+    "nome": "Araquari",
+    "regiao": "Joinville"
+  },
+  "balneario barra do sul": {
+    "nome": "Balneário Barra do Sul",
+    "regiao": "Joinville"
+  },
+  "bela vista do toldo": {
+    "nome": "Bela Vista do Toldo",
+    "regiao": "Joinville"
+  },
+  "campo alegre": {
+    "nome": "Campo Alegre",
+    "regiao": "Joinville"
+  },
+  "canoinhas": {
+    "nome": "Canoinhas",
+    "regiao": "Joinville"
+  },
+  "corupa": {
+    "nome": "Corupá",
+    "regiao": "Joinville"
+  },
+  "garuva": {
+    "nome": "Garuva",
+    "regiao": "Joinville"
+  },
+  "guaramirim": {
+    "nome": "Guaramirim",
+    "regiao": "Joinville"
+  },
+  "irineopolis": {
+    "nome": "Irineópolis",
+    "regiao": "Joinville"
+  },
+  "itaiopolis": {
+    "nome": "Itaiópolis",
+    "regiao": "Joinville"
+  },
+  "itapoa": {
+    "nome": "Itapoá",
+    "regiao": "Joinville"
+  },
+  "jaragua do sul": {
+    "nome": "Jaraguá do Sul",
+    "regiao": "Joinville"
+  },
+  "joinville": {
+    "nome": "Joinville",
+    "regiao": "Joinville"
+  },
+  "mafra": {
+    "nome": "Mafra",
+    "regiao": "Joinville"
+  },
+  "major vieira": {
+    "nome": "Major Vieira",
+    "regiao": "Joinville"
+  },
+  "massaranduba": {
+    "nome": "Massaranduba",
+    "regiao": "Joinville"
+  },
+  "monte castelo": {
+    "nome": "Monte Castelo",
+    "regiao": "Joinville"
+  },
+  "papanduva": {
+    "nome": "Papanduva",
+    "regiao": "Joinville"
+  },
+  "porto uniao": {
+    "nome": "Porto União",
+    "regiao": "Joinville"
+  },
+  "rio negrinho": {
+    "nome": "Rio Negrinho",
+    "regiao": "Joinville"
+  },
+  "sao bento do sul": {
+    "nome": "São Bento do Sul",
+    "regiao": "Joinville"
+  },
+  "sao francisco do sul": {
+    "nome": "São Francisco do Sul",
+    "regiao": "Joinville"
+  },
+  "sao joao do itaperiu": {
+    "nome": "São João do Itaperiú",
+    "regiao": "Joinville"
+  },
+  "schroeder": {
+    "nome": "Schroeder",
+    "regiao": "Joinville"
+  },
+  "tres barras": {
+    "nome": "Três Barras",
+    "regiao": "Joinville"
+  },
+  "agrolandia": {
+    "nome": "Agrolândia",
+    "regiao": "Blumenau"
+  },
+  "agronomica": {
+    "nome": "Agronômica",
+    "regiao": "Blumenau"
+  },
+  "apiuna": {
+    "nome": "Apiúna",
+    "regiao": "Blumenau"
+  },
+  "ascurra": {
+    "nome": "Ascurra",
+    "regiao": "Blumenau"
+  },
+  "atalanta": {
+    "nome": "Atalanta",
+    "regiao": "Blumenau"
+  },
+  "aurora": {
+    "nome": "Aurora",
+    "regiao": "Blumenau"
+  },
+  "balneario camboriu": {
+    "nome": "Balneário Camboriú",
+    "regiao": "Blumenau"
+  },
+  "barra velha": {
+    "nome": "Barra Velha",
+    "regiao": "Blumenau"
+  },
+  "benedito novo": {
+    "nome": "Benedito Novo",
+    "regiao": "Blumenau"
+  },
+  "blumenau": {
+    "nome": "Blumenau",
+    "regiao": "Blumenau"
+  },
+  "bombinhas": {
+    "nome": "Bombinhas",
+    "regiao": "Blumenau"
+  },
+  "botuvera": {
+    "nome": "Botuverá",
+    "regiao": "Blumenau"
+  },
+  "braco do trombudo": {
+    "nome": "Braço do Trombudo",
+    "regiao": "Blumenau"
+  },
+  "brusque": {
+    "nome": "Brusque",
+    "regiao": "Blumenau"
+  },
+  "camboriu": {
+    "nome": "Camboriú",
+    "regiao": "Blumenau"
+  },
+  "canelinha": {
+    "nome": "Canelinha",
+    "regiao": "Blumenau"
+  },
+  "chapadao do lageado": {
+    "nome": "Chapadão do Lageado",
+    "regiao": "Blumenau"
+  },
+  "dona emma": {
+    "nome": "Dona Emma",
+    "regiao": "Blumenau"
+  },
+  "doutor pedrinho": {
+    "nome": "Doutor Pedrinho",
+    "regiao": "Blumenau"
+  },
+  "gaspar": {
+    "nome": "Gaspar",
+    "regiao": "Blumenau"
+  },
+  "guabiruba": {
+    "nome": "Guabiruba",
+    "regiao": "Blumenau"
+  },
+  "ibirama": {
+    "nome": "Ibirama",
+    "regiao": "Blumenau"
+  },
+  "ilhota": {
+    "nome": "Ilhota",
+    "regiao": "Blumenau"
+  },
+  "imbuia": {
+    "nome": "Imbuia",
+    "regiao": "Blumenau"
+  },
+  "indaial": {
+    "nome": "Indaial",
+    "regiao": "Blumenau"
+  },
+  "itajai": {
+    "nome": "Itajaí",
+    "regiao": "Blumenau"
+  },
+  "itapema": {
+    "nome": "Itapema",
+    "regiao": "Blumenau"
+  },
+  "ituporanga": {
+    "nome": "Ituporanga",
+    "regiao": "Blumenau"
+  },
+  "jose boiteux": {
+    "nome": "José Boiteux",
+    "regiao": "Blumenau"
+  },
+  "laurentino": {
+    "nome": "Laurentino",
+    "regiao": "Blumenau"
+  },
+  "leoberto leal": {
+    "nome": "Leoberto Leal",
+    "regiao": "Blumenau"
+  },
+  "lontras": {
+    "nome": "Lontras",
+    "regiao": "Blumenau"
+  },
+  "luiz alves": {
+    "nome": "Luiz Alves",
+    "regiao": "Blumenau"
+  },
+  "major gercino": {
+    "nome": "Major Gercino",
+    "regiao": "Blumenau"
+  },
+  "mirim doce": {
+    "nome": "Mirim Doce",
+    "regiao": "Blumenau"
+  },
+  "navegantes": {
+    "nome": "Navegantes",
+    "regiao": "Blumenau"
+  },
+  "nova trento": {
+    "nome": "Nova Trento",
+    "regiao": "Blumenau"
+  },
+  "penha": {
+    "nome": "Penha",
+    "regiao": "Blumenau"
+  },
+  "petrolandia": {
+    "nome": "Petrolândia",
+    "regiao": "Blumenau"
+  },
+  "balneario picarras": {
+    "nome": "Balneário Piçarras",
+    "regiao": "Blumenau"
+  },
+  "pomerode": {
+    "nome": "Pomerode",
+    "regiao": "Blumenau"
+  },
+  "porto belo": {
+    "nome": "Porto Belo",
+    "regiao": "Blumenau"
+  },
+  "pouso redondo": {
+    "nome": "Pouso Redondo",
+    "regiao": "Blumenau"
+  },
+  "presidente getulio": {
+    "nome": "Presidente Getúlio",
+    "regiao": "Blumenau"
+  },
+  "presidente nereu": {
+    "nome": "Presidente Nereu",
+    "regiao": "Blumenau"
+  },
+  "rio do campo": {
+    "nome": "Rio do Campo",
+    "regiao": "Blumenau"
+  },
+  "rio do oeste": {
+    "nome": "Rio do Oeste",
+    "regiao": "Blumenau"
+  },
+  "rio dos cedros": {
+    "nome": "Rio dos Cedros",
+    "regiao": "Blumenau"
+  },
+  "rio do sul": {
+    "nome": "Rio do Sul",
+    "regiao": "Blumenau"
+  },
+  "rodeio": {
+    "nome": "Rodeio",
+    "regiao": "Blumenau"
+  },
+  "salete": {
+    "nome": "Salete",
+    "regiao": "Blumenau"
+  },
+  "santa terezinha": {
+    "nome": "Santa Terezinha",
+    "regiao": "Blumenau"
+  },
+  "sao joao batista": {
+    "nome": "São João Batista",
+    "regiao": "Blumenau"
+  },
+  "taio": {
+    "nome": "Taió",
+    "regiao": "Blumenau"
+  },
+  "tijucas": {
+    "nome": "Tijucas",
+    "regiao": "Blumenau"
+  },
+  "timbo": {
+    "nome": "Timbó",
+    "regiao": "Blumenau"
+  },
+  "trombudo central": {
+    "nome": "Trombudo Central",
+    "regiao": "Blumenau"
+  },
+  "vidal ramos": {
+    "nome": "Vidal Ramos",
+    "regiao": "Blumenau"
+  },
+  "vitor meireles": {
+    "nome": "Vitor Meireles",
+    "regiao": "Blumenau"
+  },
+  "witmarsum": {
+    "nome": "Witmarsum",
+    "regiao": "Blumenau"
+  }
+}
