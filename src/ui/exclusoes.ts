@@ -116,8 +116,8 @@ export function renderExclusoes(
     const botaoRemover = document.createElement("button");
     botaoRemover.type = "button";
     botaoRemover.className = "botao exclusoes__remover";
-    botaoRemover.textContent = "✕";
-    botaoRemover.title = "Remover exclusão";
+    botaoRemover.textContent = "Excluir";
+    botaoRemover.title = "Excluir esta regra de exclusão";
     botaoRemover.addEventListener("click", () => {
       exclusoes.splice(exclusoes.indexOf(exclusao), 1);
       renderizar();
