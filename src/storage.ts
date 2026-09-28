@@ -20,7 +20,7 @@ export function rotuloVoto(cargo: CargoId, estado: EstadoUsuario, sq: string): s
 }
 
 function estadoVazio(): EstadoUsuario {
-  return { votos: {}, favoritos: [] };
+  return { votos: {}, favoritos: [], notas: {} };
 }
 
 export function carregarEstado(): EstadoUsuario {
@@ -36,6 +36,7 @@ export function carregarEstado(): EstadoUsuario {
     return {
       votos,
       favoritos: Array.isArray(estado.favoritos) ? estado.favoritos : [],
+      notas: estado.notas && typeof estado.notas === "object" ? estado.notas : {},
     };
   } catch {
     return estadoVazio();
@@ -72,8 +73,20 @@ export function alternarFavorito(sq: string): EstadoUsuario {
   return estado;
 }
 
+export function definirNota(sq: string, texto: string): EstadoUsuario {
+  const estado = carregarEstado();
+  if (texto.trim().length > 0) {
+    estado.notas[sq] = texto;
+  } else {
+    delete estado.notas[sq];
+  }
+  salvar(estado);
+  return estado;
+}
+
 export function limparEscolhas(): EstadoUsuario {
   const estado = estadoVazio();
+  estado.notas = carregarEstado().notas;
   salvar(estado);
   return estado;
 }

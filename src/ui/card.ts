@@ -1,5 +1,5 @@
 import { formatarMoeda, formatarNomePartido, ROTULOS_ESPECTRO } from "../data";
-import { rotuloVoto } from "../storage";
+import { carregarEstado, rotuloVoto } from "../storage";
 import type { Candidato, CargoId, EspectroPartido, EstadoUsuario } from "../types";
 
 function textoEspectro(espectro: EspectroPartido): string | null {
@@ -11,6 +11,7 @@ function textoEspectro(espectro: EspectroPartido): string | null {
 export interface AcoesCard {
   aoVotar: (cargo: CargoId, sq: string) => void;
   aoFavoritar: (sq: string) => void;
+  aoAnotar: (sq: string, texto: string) => void;
 }
 
 export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoUsuario, acoes: AcoesCard): HTMLElement {
@@ -82,6 +83,15 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
     nota.textContent = candidato.nota;
     card.appendChild(nota);
   }
+
+  const anotacao = document.createElement("textarea");
+  anotacao.className = "card__anotacao";
+  anotacao.placeholder = "Anotação pessoal…";
+  anotacao.rows = 2;
+  anotacao.value = carregarEstado().notas[candidato.sq] ?? "";
+  anotacao.setAttribute("aria-label", `Anotação pessoal sobre ${candidato.nomeUrna}`);
+  anotacao.addEventListener("input", () => acoes.aoAnotar(candidato.sq, anotacao.value));
+  card.appendChild(anotacao);
 
   const acoesEl = document.createElement("div");
   acoesEl.className = "card__acoes";

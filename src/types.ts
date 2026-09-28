@@ -89,6 +89,7 @@ export interface BaseDados {
 export interface EstadoUsuario {
   votos: Record<string, string>;
   favoritos: string[];
+  notas: Record<string, string>;
 }
 
 export type FaixaPatrimonio =

@@ -1,6 +1,6 @@
 import "./style.css";
 import { carregarDados } from "./data";
-import { alternarFavorito, carregarEstado, carregarExclusoes, definirVoto, limparEscolhas, rotuloVoto, salvarExclusoes } from "./storage";
+import { alternarFavorito, carregarEstado, carregarExclusoes, definirNota, definirVoto, limparEscolhas, rotuloVoto, salvarExclusoes } from "./storage";
 import type { BaseDados, CargoId, EstadoUsuario, Filtros } from "./types";
 import { renderColinha } from "./ui/colinha";
 import { renderExclusoes } from "./ui/exclusoes";
@@ -68,6 +68,9 @@ async function iniciar(): Promise<void> {
         window.dispatchEvent(new Event("filtros-alterados"));
       }
       for (const cargo of dados.cargos) atualizarCards(cargo.id);
+    },
+    aoAnotar: (sq: string, texto: string) => {
+      estado = definirNota(sq, texto);
     },
   };
 
