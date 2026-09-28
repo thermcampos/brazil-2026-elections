@@ -9,7 +9,7 @@ export const ROTULOS_ESPECTRO: Record<PosicaoIdeologica, string> = {
 };
 
 export async function carregarDados(): Promise<BaseDados> {
-  const resposta = await fetch("data/candidatos.json");
+  const resposta = await fetch("data/candidatos.json", { cache: "no-cache" });
   if (!resposta.ok) {
     throw new Error(`Falha ao carregar dados: ${resposta.status}`);
   }
@@ -27,7 +27,7 @@ export async function carregarDados(): Promise<BaseDados> {
 
 async function carregarEspectro(): Promise<Record<string, EspectroPartido>> {
   try {
-    const resposta = await fetch("data/espectro.json");
+    const resposta = await fetch("data/espectro.json", { cache: "no-cache" });
     if (!resposta.ok) return {};
     return (await resposta.json()) as Record<string, EspectroPartido>;
   } catch {
@@ -37,7 +37,7 @@ async function carregarEspectro(): Promise<Record<string, EspectroPartido>> {
 
 async function carregarNotas(): Promise<Record<string, string>> {
   try {
-    const resposta = await fetch("data/notas.json");
+    const resposta = await fetch("data/notas.json", { cache: "no-cache" });
     if (!resposta.ok) return {};
     return (await resposta.json()) as Record<string, string>;
   } catch {

@@ -63,6 +63,7 @@ export function renderSecao(
   }
 
   window.addEventListener("filtros-alterados", atualizarContador);
+  atualizarContador();
 
   let aberto = false;
   botaoVer.addEventListener("click", () => {
