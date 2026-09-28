@@ -75,12 +75,40 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
   }
   secao.appendChild(lista);
 
+  const acoesBotoes = document.createElement("div");
+  acoesBotoes.className = "colinha__acoes";
+
   const botaoLimpar = document.createElement("button");
   botaoLimpar.type = "button";
   botaoLimpar.className = "botao botao--limpar";
   botaoLimpar.textContent = "Limpar escolhas";
   botaoLimpar.addEventListener("click", acoes.aoLimpar);
-  secao.appendChild(botaoLimpar);
+
+  const botaoCopiar = document.createElement("button");
+  botaoCopiar.type = "button";
+  botaoCopiar.className = "botao botao--copiar";
+  botaoCopiar.textContent = "Copiar colinha";
+  const definidosSlots = slots.filter((s) => s.escolhido !== null);
+  botaoCopiar.disabled = definidosSlots.length === 0;
+  botaoCopiar.addEventListener("click", async () => {
+    const linhas = definidosSlots.map((s) => `${s.rotulo}: ${s.escolhido}`);
+    const texto = `Minha colinha — Eleições 2026\n${linhas.join("\n")}`;
+    try {
+      await navigator.clipboard.writeText(texto);
+      botaoCopiar.textContent = "Copiado!";
+      setTimeout(() => {
+        botaoCopiar.textContent = "Copiar colinha";
+      }, 2000);
+    } catch {
+      botaoCopiar.textContent = "Não foi possível copiar";
+      setTimeout(() => {
+        botaoCopiar.textContent = "Copiar colinha";
+      }, 2000);
+    }
+  });
+
+  acoesBotoes.append(botaoLimpar, botaoCopiar);
+  secao.appendChild(acoesBotoes);
 
   return secao;
 }

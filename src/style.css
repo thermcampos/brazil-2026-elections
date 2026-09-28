@@ -230,9 +230,20 @@ main {
 }
 
 .botao--limpar {
-  margin-top: 1rem;
   color: var(--perigo-escuro);
   border-color: var(--perigo);
+}
+
+.colinha__acoes {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.botao--copiar {
+  color: var(--primaria-escura);
+  border-color: var(--primaria-escura);
 }
 
 .botao--proposta {
