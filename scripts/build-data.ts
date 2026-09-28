@@ -315,6 +315,20 @@ for (const arquivo of readdirSync(join("public/propostas", UF))) {
   }
 }
 
+const propostasPresidentes = new Map<string, string>();
+if (existsSync("public/propostas/presidentes")) {
+  for (const arquivo of readdirSync("public/propostas/presidentes")) {
+    if (!arquivo.toLowerCase().endsWith(".pdf")) continue;
+    propostasPresidentes.set(arquivo.replace(/\.pdf$/i, "").toLowerCase(), `propostas/presidentes/${arquivo}`);
+  }
+}
+
+function propostaPresidente(nomeUrna: string): string | null {
+  const base = nomeUrna.toLowerCase().trim().replace(/\s+/g, "-");
+  const semAcento = base.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return propostasPresidentes.get(base) ?? propostasPresidentes.get(semAcento) ?? null;
+}
+
 function montarCandidato(r: Record<string, string>): Candidato {
   const sq = r["SQ_CANDIDATO"];
   const listaBens = (bensPorSq.get(sq) ?? []).sort((a, b) => b.valor - a.valor);
@@ -374,7 +388,7 @@ function montarCandidato(r: Record<string, string>): Candidato {
     nota: null,
     espectro: null,
     foto: fotosPorSq.get(sq) ?? fotoPresidente(r["NM_URNA_CANDIDATO"] ?? ""),
-    proposta: propostasPorSq.get(sq) ?? null,
+    proposta: propostasPorSq.get(sq) ?? propostaPresidente(r["NM_URNA_CANDIDATO"] ?? ""),
   };
 }
 
