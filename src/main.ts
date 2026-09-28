@@ -1,8 +1,9 @@
 import "./style.css";
 import { carregarDados } from "./data";
-import { alternarFavorito, carregarEstado, definirVoto, limparEscolhas, rotuloVoto } from "./storage";
+import { alternarFavorito, carregarEstado, carregarExclusoes, definirVoto, limparEscolhas, rotuloVoto, salvarExclusoes } from "./storage";
 import type { BaseDados, CargoId, EstadoUsuario, Filtros } from "./types";
 import { renderColinha } from "./ui/colinha";
+import { renderExclusoes } from "./ui/exclusoes";
 import { renderFiltros } from "./ui/filtros";
 import { renderSecao } from "./ui/secao";
 
@@ -75,11 +76,19 @@ async function iniciar(): Promise<void> {
     aoMudar: () => window.dispatchEvent(new Event("filtros-alterados")),
   });
 
+  const exclusoes = carregarExclusoes();
+  const painelExclusoes = renderExclusoes(dados, exclusoes, {
+    aoMudar: (lista) => {
+      salvarExclusoes(lista);
+      window.dispatchEvent(new Event("filtros-alterados"));
+    },
+  });
+
   const secoes = dados.cargos.map((cargo) =>
-    renderSecao(cargo, estado, acoes, () => filtros, () => estado.favoritos),
+    renderSecao(cargo, estado, acoes, () => filtros, () => estado.favoritos, () => exclusoes),
   );
   const colinha = renderColinha(dados, estado, { aoLimpar });
-  app.replaceChildren(barraFiltros, ...secoes, colinha);
+  app.replaceChildren(barraFiltros, painelExclusoes, ...secoes, colinha);
 }
 
 iniciar();

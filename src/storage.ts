@@ -1,6 +1,9 @@
-import type { CargoId, EstadoUsuario } from "./types";
+import type { CargoId, EstadoUsuario, Exclusao } from "./types";
 
 const CHAVE = "eleicoes-2026-sc";
+const CHAVE_EXCLUSOES = "eleicoes-2026-sc-exclusoes";
+
+const CAMPOS_EXCLUSAO = ["partido", "escolaridade", "patrimonio", "regiao", "espectro"];
 
 export function chavesVoto(cargo: CargoId): string[] {
   return cargo === "senador" ? ["senador-1", "senador-2"] : [cargo];
@@ -73,4 +76,27 @@ export function limparEscolhas(): EstadoUsuario {
   const estado = estadoVazio();
   salvar(estado);
   return estado;
+}
+
+export function carregarExclusoes(): Exclusao[] {
+  try {
+    const bruto = localStorage.getItem(CHAVE_EXCLUSOES);
+    if (!bruto) return [];
+    const lista = JSON.parse(bruto) as Exclusao[];
+    if (!Array.isArray(lista)) return [];
+    return lista.filter(
+      (exclusao) =>
+        exclusao &&
+        CAMPOS_EXCLUSAO.includes(exclusao.campo) &&
+        (exclusao.operacao === "is" || exclusao.operacao === "is-not") &&
+        typeof exclusao.valor === "string" &&
+        exclusao.valor.length > 0,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export function salvarExclusoes(exclusoes: Exclusao[]): void {
+  localStorage.setItem(CHAVE_EXCLUSOES, JSON.stringify(exclusoes));
 }

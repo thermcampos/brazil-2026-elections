@@ -108,3 +108,18 @@ export interface Filtros {
   espectro: PosicaoIdeologica | null;
   somenteFavoritos: boolean;
 }
+
+export type CampoExclusao =
+  | "partido"
+  | "escolaridade"
+  | "patrimonio"
+  | "regiao"
+  | "espectro";
+
+export type OperacaoExclusao = "is" | "is-not";
+
+export interface Exclusao {
+  campo: CampoExclusao;
+  operacao: OperacaoExclusao;
+  valor: string;
+}

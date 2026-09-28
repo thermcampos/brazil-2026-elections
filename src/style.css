@@ -69,6 +69,7 @@ main {
 
 .secao,
 .colinha,
+.exclusoes,
 .filtros {
   background: var(--superficie);
   border: 1px solid var(--borda);
@@ -120,9 +121,51 @@ main {
 }
 
 .secao__cabecalho h2,
-.colinha h2 {
+.colinha h2,
+.exclusoes h2 {
   margin: 0;
   font-size: 1.3rem;
+}
+
+.exclusoes__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.exclusoes__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.exclusoes__linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.exclusoes__linha select {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font-size: 0.95rem;
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.exclusoes__vazio {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  margin: 0.75rem 0 0;
+}
+
+.exclusoes__remover {
+  color: var(--perigo-escuro);
+  border-color: var(--perigo);
 }
 
 .secao__total {

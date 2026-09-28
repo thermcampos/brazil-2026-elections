@@ -1,4 +1,4 @@
-import type { BaseDados, Candidato, EspectroPartido, Filtros, PosicaoIdeologica } from "./types";
+import type { BaseDados, Candidato, EspectroPartido, Exclusao, FaixaPatrimonio, Filtros, PosicaoIdeologica } from "./types";
 
 export const ROTULOS_ESPECTRO: Record<PosicaoIdeologica, string> = {
   esquerda: "Esquerda",
@@ -110,11 +110,8 @@ export function aplicarFiltros(
     resultado = resultado.filter((c) => c.partido.sigla === filtros.partido);
   }
   if (filtros.patrimonio) {
-    const [min, max] = FAIXAS_PATRIMONIO[filtros.patrimonio];
-    resultado =
-      filtros.patrimonio === "zero"
-        ? resultado.filter((c) => c.patrimonioTotal === 0)
-        : resultado.filter((c) => c.patrimonioTotal > min && c.patrimonioTotal <= max);
+    const faixa = filtros.patrimonio;
+    resultado = resultado.filter((c) => correspondePatrimonio(c, faixa));
   }
   if (filtros.regiao) {
     resultado =
@@ -124,6 +121,45 @@ export function aplicarFiltros(
   }
   if (filtros.espectro) {
     resultado = resultado.filter((c) => c.espectro?.posicao === filtros.espectro);
+  }
+  return resultado;
+}
+
+function correspondePatrimonio(candidato: Candidato, faixa: FaixaPatrimonio): boolean {
+  const [min, max] = FAIXAS_PATRIMONIO[faixa];
+  return faixa === "zero"
+    ? candidato.patrimonioTotal === 0
+    : candidato.patrimonioTotal > min && candidato.patrimonioTotal <= max;
+}
+
+function correspondeExclusao(candidato: Candidato, exclusao: Exclusao): boolean {
+  switch (exclusao.campo) {
+    case "partido":
+      return candidato.partido.sigla === exclusao.valor;
+    case "escolaridade":
+      return candidato.escolaridade === exclusao.valor;
+    case "patrimonio":
+      return exclusao.valor in FAIXAS_PATRIMONIO
+        ? correspondePatrimonio(candidato, exclusao.valor as FaixaPatrimonio)
+        : false;
+    case "regiao":
+      return exclusao.valor === "__fora__"
+        ? candidato.regiao === null
+        : candidato.regiao === exclusao.valor;
+    case "espectro":
+      return candidato.espectro?.posicao === exclusao.valor;
+  }
+}
+
+export function aplicarExclusoes(candidatos: Candidato[], exclusoes: Exclusao[]): Candidato[] {
+  let resultado = candidatos;
+  for (const exclusao of exclusoes) {
+    if (!exclusao.valor) continue;
+    resultado = resultado.filter((c) =>
+      exclusao.operacao === "is"
+        ? correspondeExclusao(c, exclusao)
+        : !correspondeExclusao(c, exclusao),
+    );
   }
   return resultado;
 }

@@ -1,5 +1,5 @@
-import { aplicarFiltros, filtrarCandidatos } from "../data";
-import type { Cargo, EstadoUsuario, Filtros } from "../types";
+import { aplicarExclusoes, aplicarFiltros, filtrarCandidatos } from "../data";
+import type { Candidato, Cargo, EstadoUsuario, Exclusao, Filtros } from "../types";
 import { renderCard, type AcoesCard } from "./card";
 
 export function renderSecao(
@@ -8,6 +8,7 @@ export function renderSecao(
   acoes: AcoesCard,
   obterFiltros: () => Filtros,
   obterFavoritos: () => string[],
+  obterExclusoes: () => Exclusao[],
 ): HTMLElement {
   const secao = document.createElement("section");
   secao.className = "secao";
@@ -36,12 +37,19 @@ export function renderSecao(
 
   let busca: HTMLInputElement | null = null;
 
+  function filtrar(): Candidato[] {
+    return aplicarExclusoes(
+      aplicarFiltros(
+        filtrarCandidatos(cargo.candidatos, busca?.value ?? ""),
+        obterFiltros(),
+        obterFavoritos(),
+      ),
+      obterExclusoes(),
+    );
+  }
+
   function contarFiltrados(): number {
-    return aplicarFiltros(
-      filtrarCandidatos(cargo.candidatos, busca?.value ?? ""),
-      obterFiltros(),
-      obterFavoritos(),
-    ).length;
+    return filtrar().length;
   }
 
   function atualizarContador(): void {
@@ -80,11 +88,7 @@ export function renderSecao(
     vazio.hidden = true;
 
     function renderizarGrade(): void {
-      const filtrados = aplicarFiltros(
-        filtrarCandidatos(cargo.candidatos, busca!.value),
-        obterFiltros(),
-        obterFavoritos(),
-      );
+      const filtrados = filtrar();
       grade.replaceChildren(
         ...filtrados.map((c) => renderCard(c, cargo.id, estado, acoes)),
       );
