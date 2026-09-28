@@ -532,3 +532,8 @@ main {
 .rodape a {
   color: var(--primaria-escura);
 }
+
+.rodape .versao {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}

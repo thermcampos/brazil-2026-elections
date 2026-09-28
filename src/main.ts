@@ -8,6 +8,15 @@ import { renderFiltros } from "./ui/filtros";
 import { renderSecao } from "./ui/secao";
 
 async function iniciar(): Promise<void> {
+  const linkVersao = document.querySelector<HTMLAnchorElement>("#versao-commit");
+  if (linkVersao && __COMMIT_HASH__ !== "dev") {
+    linkVersao.textContent = __COMMIT_HASH__;
+    linkVersao.href = `https://github.com/thermcampos/brazil-2026-elections/commit/${__COMMIT_HASH__}`;
+  } else if (linkVersao) {
+    linkVersao.textContent = __COMMIT_HASH__;
+    linkVersao.removeAttribute("href");
+  }
+
   const app = document.querySelector<HTMLElement>("#app");
   if (!app) return;
 
