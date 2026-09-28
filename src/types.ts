@@ -86,6 +86,7 @@ export type FaixaPatrimonio =
   | "acima-5-milhoes";
 
 export interface Filtros {
+  partido: string | null;
   escolaridade: string | null;
   patrimonio: FaixaPatrimonio | null;
   regiao: string | null;

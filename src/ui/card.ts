@@ -1,4 +1,4 @@
-import { formatarMoeda } from "../data";
+import { formatarMoeda, formatarNomePartido } from "../data";
 import { rotuloVoto } from "../storage";
 import type { Candidato, CargoId, EstadoUsuario } from "../types";
 
@@ -38,6 +38,14 @@ export function renderCard(candidato: Candidato, cargo: CargoId, estado: EstadoU
   numero.className = "card__numero";
   numero.textContent = `${candidato.numero} · ${candidato.partido.sigla}`;
   identidade.append(nome, numero);
+  const nomePartido = formatarNomePartido(candidato.partido.nome);
+  numero.title = nomePartido;
+  if (nomePartido.toLowerCase() !== candidato.partido.sigla.toLowerCase()) {
+    const partido = document.createElement("p");
+    partido.className = "card__partido";
+    partido.textContent = nomePartido;
+    identidade.appendChild(partido);
+  }
   cabecalho.appendChild(identidade);
   card.appendChild(cabecalho);
 
@@ -225,7 +233,7 @@ function renderDetalhes(candidato: Candidato): HTMLElement {
   const info = document.createElement("dl");
   info.className = "card__resumo";
   adicionarItem(info, "Nome completo", candidato.nomeCompleto);
-  adicionarItem(info, "Partido", `${candidato.partido.sigla} - ${candidato.partido.nome}`);
+  adicionarItem(info, "Partido", `${candidato.partido.sigla} - ${formatarNomePartido(candidato.partido.nome)}`);
   if (candidato.coligacao) adicionarItem(info, "Coligação", candidato.coligacao);
   if (candidato.federacao) adicionarItem(info, "Federação", candidato.federacao);
   adicionarItem(info, "Gênero", candidato.genero);

@@ -70,7 +70,7 @@ async function iniciar(): Promise<void> {
     },
   };
 
-  const filtros: Filtros = { escolaridade: null, patrimonio: null, regiao: null, somenteFavoritos: false };
+  const filtros: Filtros = { partido: null, escolaridade: null, patrimonio: null, regiao: null, somenteFavoritos: false };
   const barraFiltros = renderFiltros(dados, filtros, {
     aoMudar: () => window.dispatchEvent(new Event("filtros-alterados")),
   });

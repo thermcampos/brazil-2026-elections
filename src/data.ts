@@ -29,6 +29,29 @@ export function formatarMoeda(valor: number): string {
   return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+export function formatarNomePartido(nome: string): string {
+  return nome.replace(/\s+/g, " ").trim();
+}
+
+export interface PartidoResumo {
+  sigla: string;
+  nome: string;
+}
+
+export function partidosDisponiveis(dados: BaseDados): PartidoResumo[] {
+  const mapa = new Map<string, string>();
+  for (const cargo of dados.cargos) {
+    for (const candidato of cargo.candidatos) {
+      if (!mapa.has(candidato.partido.sigla)) {
+        mapa.set(candidato.partido.sigla, formatarNomePartido(candidato.partido.nome));
+      }
+    }
+  }
+  return [...mapa.entries()]
+    .map(([sigla, nome]) => ({ sigla, nome }))
+    .sort((a, b) => a.sigla.localeCompare(b.sigla, "pt-BR"));
+}
+
 export function filtrarCandidatos(candidatos: Candidato[], termo: string): Candidato[] {
   const busca = normalizar(termo);
   if (!busca) return candidatos;
@@ -62,6 +85,9 @@ export function aplicarFiltros(
   }
   if (filtros.escolaridade) {
     resultado = resultado.filter((c) => c.escolaridade === filtros.escolaridade);
+  }
+  if (filtros.partido) {
+    resultado = resultado.filter((c) => c.partido.sigla === filtros.partido);
   }
   if (filtros.patrimonio) {
     const [min, max] = FAIXAS_PATRIMONIO[filtros.patrimonio];

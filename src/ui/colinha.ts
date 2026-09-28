@@ -1,3 +1,4 @@
+import { formatarNomePartido } from "../data";
 import { chavesVoto } from "../storage";
 import type { BaseDados, EstadoUsuario } from "../types";
 import { alertaRegistro } from "./card";
@@ -10,6 +11,7 @@ interface Slot {
   rotulo: string;
   digitos: number;
   escolhido: string | null;
+  partidoNome: string | null;
   alerta: string | null;
 }
 
@@ -30,6 +32,7 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
         escolhido: candidato
           ? `${candidato.numero} — ${candidato.nomeUrna} (${candidato.partido.sigla})`
           : null,
+        partidoNome: candidato ? formatarNomePartido(candidato.partido.nome) : null,
         alerta: candidato ? alertaRegistro(candidato) : null,
       });
     });
@@ -57,6 +60,7 @@ export function renderColinha(dados: BaseDados, estado: EstadoUsuario, acoes: Ac
     const dd = document.createElement("dd");
     if (slot.escolhido) {
       dd.textContent = slot.escolhido;
+      if (slot.partidoNome) dd.title = slot.partidoNome;
       if (slot.alerta) {
         const aviso = document.createElement("span");
         aviso.className = "colinha__alerta";

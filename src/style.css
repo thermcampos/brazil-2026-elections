@@ -241,6 +241,12 @@ main {
   font-size: 0.9rem;
 }
 
+.card__partido {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
 .card__resumo {
   margin: 0;
   display: grid;

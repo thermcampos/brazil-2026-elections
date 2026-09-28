@@ -1,4 +1,4 @@
-import { escolaridadesDisponiveis, regioesDisponiveis } from "../data";
+import { escolaridadesDisponiveis, partidosDisponiveis, regioesDisponiveis } from "../data";
 import type { BaseDados, FaixaPatrimonio, Filtros } from "../types";
 
 export const ROTULOS_PATRIMONIO: Record<FaixaPatrimonio, string> = {
@@ -18,6 +18,26 @@ export interface AcoesFiltros {
 export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFiltros): HTMLElement {
   const barra = document.createElement("div");
   barra.className = "filtros";
+
+  const grupoPartido = document.createElement("label");
+  grupoPartido.className = "filtros__grupo";
+  const rotuloPartido = document.createElement("span");
+  rotuloPartido.textContent = "Partido";
+  const selectPartido = document.createElement("select");
+  selectPartido.appendChild(new Option("Todos", ""));
+  for (const partido of partidosDisponiveis(dados)) {
+    const rotulo =
+      partido.sigla.toLowerCase() === partido.nome.toLowerCase()
+        ? partido.sigla
+        : `${partido.sigla} — ${partido.nome}`;
+    selectPartido.appendChild(new Option(rotulo, partido.sigla));
+  }
+  selectPartido.value = filtros.partido ?? "";
+  selectPartido.addEventListener("change", () => {
+    filtros.partido = selectPartido.value || null;
+    acoes.aoMudar(filtros);
+  });
+  grupoPartido.append(rotuloPartido, selectPartido);
 
   const grupoEscolaridade = document.createElement("label");
   grupoEscolaridade.className = "filtros__grupo";
@@ -81,6 +101,6 @@ export function renderFiltros(dados: BaseDados, filtros: Filtros, acoes: AcoesFi
   rotuloFavoritos.textContent = "Com estrelas";
   grupoFavoritos.append(checkboxFavoritos, rotuloFavoritos);
 
-  barra.append(grupoEscolaridade, grupoPatrimonio, grupoRegiao, grupoFavoritos);
+  barra.append(grupoPartido, grupoEscolaridade, grupoPatrimonio, grupoRegiao, grupoFavoritos);
   return barra;
 }
