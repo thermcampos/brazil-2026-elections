@@ -1,5 +1,6 @@
 import { aplicarExclusoes, aplicarFiltros, filtrarCandidatos } from "../data";
 import type { Candidato, Cargo, EstadoUsuario, Exclusao, Filtros } from "../types";
+import { abrirAjuda } from "./ajuda";
 import { renderCard, type AcoesCard } from "./card";
 
 export function renderSecao(
@@ -22,7 +23,12 @@ export function renderSecao(
   const total = document.createElement("span");
   total.className = "secao__total";
   total.textContent = `${cargo.candidatos.length} candidatos`;
-  cabecalho.append(titulo, total);
+  const ajuda = document.createElement("button");
+  ajuda.type = "button";
+  ajuda.className = "secao__ajuda";
+  ajuda.textContent = "o que é e o que faz";
+  ajuda.addEventListener("click", () => abrirAjuda(cargo.id));
+  cabecalho.append(titulo, total, ajuda);
   secao.appendChild(cabecalho);
 
   const botaoVer = document.createElement("button");
