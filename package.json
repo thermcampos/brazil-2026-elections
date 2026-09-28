@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:data": "tsx scripts/build-data.ts",
-    "build:regioes": "tsx scripts/build-regioes.ts"
+    "build:regioes": "tsx scripts/build-regioes.ts",
+    "build:espectro": "tsx scripts/build-espectro.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",

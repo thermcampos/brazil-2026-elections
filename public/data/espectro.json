@@ -1,0 +1,161 @@
+{
+  "AGIR": {
+    "bls": 0.869,
+    "blsAno": 1993,
+    "posicao": "direita",
+    "nota": "linhagem PJ -> PRN -> PTC -> AGIR; ultima medicao BLS do PRN em 1993"
+  },
+  "AVANTE": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "CIDADANIA": {
+    "bls": -0.014,
+    "blsAno": 2021,
+    "posicao": "centro"
+  },
+  "DC": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "DEMOCRATA": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "MDB": {
+    "bls": 0.137,
+    "blsAno": 2021,
+    "posicao": "centro"
+  },
+  "MISSÃO": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "NOVO": {
+    "bls": 0.711,
+    "blsAno": 2021,
+    "posicao": "direita"
+  },
+  "PCB": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "PCDOB": {
+    "bls": -0.822,
+    "blsAno": 2021,
+    "posicao": "esquerda"
+  },
+  "PCO": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "PDT": {
+    "bls": -0.356,
+    "blsAno": 2021,
+    "posicao": "centro-esquerda"
+  },
+  "PL": {
+    "bls": 0.493,
+    "blsAno": 2021,
+    "posicao": "centro-direita"
+  },
+  "PODE": {
+    "bls": 0.386,
+    "blsAno": 2021,
+    "posicao": "centro-direita"
+  },
+  "PP": {
+    "bls": 0.51,
+    "blsAno": 2021,
+    "posicao": "direita"
+  },
+  "PRD": {
+    "bls": 0.455,
+    "blsAno": 2021,
+    "posicao": "centro-direita",
+    "nota": "sem medicao propria; usa PTB 2021 (PRD nasceu da fusao PTB + Patriota em 2023; o Patriota nao foi avaliado)"
+  },
+  "PRTB": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  },
+  "PSB": {
+    "bls": -0.427,
+    "blsAno": 2021,
+    "posicao": "centro-esquerda"
+  },
+  "PSD": {
+    "bls": 0.296,
+    "blsAno": 2021,
+    "posicao": "centro-direita"
+  },
+  "PSDB": {
+    "bls": 0.157,
+    "blsAno": 2021,
+    "posicao": "centro-direita"
+  },
+  "PSOL": {
+    "bls": -0.874,
+    "blsAno": 2021,
+    "posicao": "esquerda"
+  },
+  "PSTU": {
+    "bls": -0.826,
+    "blsAno": 1993,
+    "posicao": "esquerda",
+    "nota": "ultima medicao BLS de 1993"
+  },
+  "PT": {
+    "bls": -0.691,
+    "blsAno": 2021,
+    "posicao": "esquerda"
+  },
+  "PV": {
+    "bls": -0.069,
+    "blsAno": 2017,
+    "posicao": "centro",
+    "nota": "ultima medicao BLS de 2017"
+  },
+  "REDE": {
+    "bls": -0.555,
+    "blsAno": 2017,
+    "posicao": "esquerda",
+    "nota": "ultima medicao BLS de 2017"
+  },
+  "REPUBLICANOS": {
+    "bls": 0.55,
+    "blsAno": 2021,
+    "posicao": "direita"
+  },
+  "SOLIDARIEDADE": {
+    "bls": 0.19,
+    "blsAno": 2021,
+    "posicao": "centro-direita"
+  },
+  "UNIÃO": {
+    "bls": 0.617,
+    "blsAno": 2021,
+    "posicao": "direita",
+    "nota": "media heuristica PSL (0.803) e DEM (0.431) 2021, partidos que se fundiram no UNIAO"
+  },
+  "UP": {
+    "bls": null,
+    "blsAno": null,
+    "posicao": null,
+    "nota": "sem dados no BLS9 (partido novo, sem bancada federal ou nunca avaliado)"
+  }
+}
