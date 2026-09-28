@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: thermcampos/brazil-2026-elections
+  IMAGE_NAME: rmcampos/brazil-2026-elections
 
 jobs:
   build-and-push:
@@ -24,6 +24,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Create Docker Hub repository if missing
+        env:
+          DH_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+          DH_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          JWT=$(curl -s -X POST https://hub.docker.com/v2/users/login \
+            -H "Content-Type: application/json" \
+            -d "{\"username\": \"$DH_USER\", \"password\": \"$DH_TOKEN\"}" | jq -r .token)
+          repo="${IMAGE_NAME#*/}"
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://hub.docker.com/v2/repositories/ \
+            -H "Authorization: JWT $JWT" -H "Content-Type: application/json" \
+            -d "{\"namespace\": \"$DH_USER\", \"name\": \"$repo\", \"is_private\": false}")
+          echo "Repository creation returned HTTP $code (400 = already exists)"
 
       - name: Extract metadata
         id: meta
