@@ -82,8 +82,8 @@ export function renderExclusoes(
 
     const selectOperacao = document.createElement("select");
     selectOperacao.setAttribute("aria-label", "Operação da exclusão");
-    selectOperacao.appendChild(new Option("IS", "is"));
-    selectOperacao.appendChild(new Option("IS NOT", "is-not"));
+    selectOperacao.appendChild(new Option("é", "is"));
+    selectOperacao.appendChild(new Option("não é", "is-not"));
     selectOperacao.value = exclusao.operacao;
 
     const selectValor = document.createElement("select");

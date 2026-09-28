@@ -12,7 +12,7 @@ bandeira de Santa Catarina.
   escolaridade, patrimônio declarado, região de nascimento e "Com estrelas"
   (somente favoritos).
 - **Painel de Exclusões**: regras dinâmicas combinando qualquer campo dos filtros
-  com os operadores `IS` / `IS NOT`. As regras se acumulam com `AND`, podem ser
+  com os operadores "é" / "não é". As regras se acumulam com `E` lógico, podem ser
   removidas individualmente, são salvas no `localStorage` e atualizam as listas de
   candidatos na hora.
 - **Cards enriquecidos**: selo de espectro ideológico do partido (índice BLS),
@@ -61,7 +61,7 @@ src/
   storage.ts               # votos, favoritos e exclusões no localStorage
   ui/card.ts               # card do candidato (resumo + detalhes)
   ui/filtros.ts            # barra de filtros globais
-  ui/exclusoes.ts          # painel de exclusões dinâmicas (IS / IS NOT)
+  ui/exclusoes.ts          # painel de exclusões dinâmicas (é / não é)
   ui/secao.ts              # seção por cargo (botão, busca, grade)
   ui/colinha.ts            # resumo final "Minha colinha"
   style.css
